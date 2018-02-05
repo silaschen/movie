@@ -1,0 +1,80 @@
+{extend name='index:base'}
+{block name='main'}
+	<ol class="breadcrumb">
+			  <li><a href="index.html">Home</a></li>
+			  <li class="active">博客</li>
+			</ol>
+
+	<div class="blog-section">
+		<div class="col-md-8 blog-posts">
+			<h3 class="post">Latest Posts</h3>
+
+
+			<div class="blog-top">
+
+				{foreach name='blogs' item='vo'}
+
+			  <div class="col-md-6 grid_3">
+					<a href="{:url('index/index/readblog',array('id'=>$vo['id']))}"><img src="{$Think.config.WEBSERVER}/{$vo.cover}" class="img-responsive" alt=""></a>
+					<div class="blog-poast-info">
+						<ul>
+							<li><i class="fa fa-user"></i><a class="admin" href="{:url('index/index/readblog',array('id'=>$vo['id']))}"><span> </span> Admin </a></li>
+							<li><i class="fa fa-calendar"></i><span> </span>{$vo.addtime|date="Y-m-d",###}</li>
+							<li><i class="fa fa-comments"></i><a class="p-blog" href="#"><span> </span>3 评论 </a></li>
+						</ul>
+				    </div>
+					<h3><a href="single.html">{$vo.title}</a></h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					
+				</div>
+
+				{/foreach}
+
+
+				<div class="clearfix"></div>
+			  </div>
+			
+
+
+
+		</div>
+		<div class="col-md-4 blog-categories">
+			<h3 class="post">最热博客</h3>
+			<p><a href="#">Celebrity Interviews</a> (34)</p>
+			<p><a href="#">Lorem Ipsum</a> (12)</p>
+			<p><a href="#">Bollwood Movies</a> (34)</p>
+			<p><a href="#">Tamil Movies</a> (12)</p>
+			<p><a href="#">Tollywood Movies</a> (34)</p>
+			<p><a href="#">Collywood Movies</a> (12)</p>
+			<p><a href="#">Celebrity Interviews</a> (34)</p>
+			<p><a href="#">Actors</a> (12)</p>
+			<p><a href="#">Actress</a> (34)</p>
+			<p><a href="#">Movie News</a> (12)</p>
+			<p><a href="#">Music</a> (34)</p>
+			<p><a href="#">Indian Music</a> (12)</p>
+			<p><a href="#">Celebrity Interviews</a> (34)</p>
+			<p><a href="#">Lorem Ipsum</a> (12)</p>
+			<p><a href="#">Celebrity Interviews</a> (34)</p>
+			<p><a href="#">Lorem Ipsum</a> (12)</p>
+			<p><a href="#">Celebrity Interviews</a> (34)</p>
+			<p><a href="#">Lorem Ipsum</a> (12)</p>
+			<p><a href="#">Celebrity Interviews</a> (34)</p>
+			<p><a href="#">Lorem Ipsum</a> (12)</p>
+			<p><a href="#">Celebrity Interviews</a> (34)</p>
+			<p><a href="#">Lorem Ipsum</a> (12)</p>
+		</div>
+				<div class="clearfix"></div>
+	</div>
+	<div class="blog-pagimation">
+	<ul class="pagination sint">
+			<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+			<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+			<li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+			<li><a href="#">3 <span class="sr-only">(current)</span></a></li>
+			<li><a href="#">4 <span class="sr-only">(current)</span></a></li>
+			<li><a href="#">5 <span class="sr-only">(current)</span></a></li>
+			<li class="abled"><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+		  </ul>
+		  </div>
+	<div class="clearfix"></div>
+	{/block}

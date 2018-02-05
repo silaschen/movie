@@ -19,7 +19,7 @@ return [
     // 应用调试模式
     'app_debug'              => true,
     // 应用Trace
-    'app_trace'              => true,
+    'app_trace'              => false,
     // 应用模式状态
     'app_status'             => '',
     // 是否支持多模块
@@ -50,7 +50,7 @@ return [
     'class_suffix'           => false,
     // 控制器类后缀
     'controller_suffix'      => false,
-    'WEBSERVER'=>'http://hotelnsb.top',
+    'WEBSERVER'=>'http://54.95.128.42',
     // +----------------------------------------------------------------------
     // | 模块设置
     // +----------------------------------------------------------------------

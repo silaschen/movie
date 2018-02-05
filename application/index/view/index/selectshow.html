@@ -50,7 +50,7 @@
 					</li>
 					{foreach name='da.time' item='v'}
 					<li class="time">
-						<a href="{:url('Index/index/payment',array('cid'=>$da['cinemaid'],'vid'=>$film[0]['id'],'time'=>$v))}">{$v}</a>
+						<a href="{:url('Index/index/payment',array('cid'=>$da['cinemaid'],'vid'=>$film[0]['id'],'time'=>$v,'tid'=>$da['id']))}">{$v}</a>
 					</li>
 					{/foreach}
 	

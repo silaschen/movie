@@ -22,25 +22,11 @@ class Index extends Common
 
 
 	}
-	
-
-	public function playonline(){
-
-		$id = input('id');
-		$video = Db::name('video')->where(['id'=>$id])->find();
-			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/"); $this->assign('video',$video);
-		$this->UpdateVideoView($id);
-		return $this->fetch('playonline');
-
-
-
-	}
-
 
     public function index(){
 		$slides = Db::name('slides')->select();
 		$this->assign('slides',$slides);
-		$movie = Db::name('video')->where(['cate'=>1])->select();
+		$movie = Db::name('video')->select();
 		$this->assign('slidetwo',$movie);
 		$weekfinal = strtotime(date('Y-m-d', (time() + (7 - (date('w') == 0 ? 7 : date('w'))) * 24 * 3600+86400)));
 		$day = strtotime(date('Y-m-d',time()));
@@ -74,18 +60,9 @@ class Index extends Common
 		}
 
 		$logined = \redisObj\redisTool::getRedis()->range('loginuser',0,-1);
-		//online
-		$online = Db::name('video')->where(['cate'=>2])->select();
-		$this->assign(['now'=>$now,'week'=>$week,'will'=>$will,'day'=>$day,'blog'=>$blog,'online'=>$online]);	
+		var_dump($logined);
+		$this->assign(['now'=>$now,'week'=>$week,'will'=>$will,'day'=>$day,'blog'=>$blog]);	
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
-		//top moview
-		$top_total = Db::query("select sum(view) as total from video where cate=1");
-		$top = Db::query("select id,title,view from video where cate=1 order by view desc limit 6");
-		$this->assign(['top'=>$top]);
-
-
-
-
 		return $this->fetch('index');
     }
 	
@@ -115,9 +92,9 @@ class Index extends Common
 
 			exit(json_encode(['code'=>0]));
 		}
-	}
-	
 
+
+	}
 
 	public function SetUserLogin($user){
 		
@@ -136,7 +113,7 @@ class Index extends Common
 		foreach($res as $k=>$v){
 			$res[$k]['time']= json_decode($v['time']);
 		}
-			$this->UpdateVideoView($id); $this->assign('moviedates',$res);
+		$this->assign('moviedates',$res);
 		$this->assign('film',$film);
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 		return $this->fetch('selectshow');
@@ -167,7 +144,7 @@ class Index extends Common
 	public function blog(){
 		$blogs = Db::query("select * from blog order by addtime desc");
 		$this->assign('blogs',$blogs);
-		$this->assign('webserver',\think\Config::get('WEBSERVER')."/");
+		$this->assign('webserver',ThinkConfig::get('WEBSERVER')."/");
 		return $this->fetch('blog');
 
 
@@ -182,10 +159,11 @@ class Index extends Common
 		$id = input('id');
 		$blog = Db::name('blog')->where(array('id'=>$id))->find();
 		$this->assign('blog',$blog);
-		$comment = Db::query("select a.content,a.addtime,b.nickname from blog_comment a left join user b ON a.uid=b.id where a.blogid='{$id}'");
-		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
-		$this->assign('comments',$comment);
+		$comment = Db::query("select a.content,a.addtime,b.nickname from blog_comment a left join user b ON a.uid=b.id");
+		var_dump($comment);exit;
+	$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 		return $this->fetch('single');
+
 	}	
 
 	public function comment(){
@@ -203,12 +181,7 @@ class Index extends Common
 	}
 
 
-	public function UpdateVideoView($id){
-			$old = Db::name('video')->where(['id'=>$id])->find();
-			$old = $old['view'];
-			$sql = sprintf("update video set view='%d' where id='%d'",$old+1,$id);
-			Db::execute($sql);
-	}
+
 	      
     /**
      * taglist

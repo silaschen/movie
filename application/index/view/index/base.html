@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Select Show</title>
+<title>全球影视社区，在线购票</title>
 <link href="{$Think.config.WEBSERVER}/public/film/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
 <link href="{$Think.config.WEBSERVER}/public/film/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -46,7 +46,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				});
 			});
 		</script>
-<!---- start-smoth-scrolling---->
 </head>
 <body>
 	<!-- header-section-starts -->
@@ -117,7 +116,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             <button class="btn btn-primary"  data-toggle="modal">{$Think.session.login_nick}</button>
 
-            <button class="btn btn-primary" onclick="alert('开发中...')"  data-toggle="modal">logout</button>
+            <button class="btn btn-primary" onclick="alert('开发中...')"  data-toggle="modal">登出</button>
 
 
     {else}
@@ -224,26 +223,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="col-sm-10">
                                         <button type="button" onclick="register()" class="btn btn-primary btn-sm">
                                             注册</button>
-                                        <button type="button" class="btn btn-default btn-sm">
-                                            Cancel</button>
+                                        <button type="button" onclick="$('#loginmodal').modal('hide')" class="btn btn-default btn-sm">
+                                            取消</button>
                                     </div>
                                 </div>
                                 </form>
                             </div>
                         </div>
                         <div id="OR" class="hidden-xs">
-                            OR</div>
+                            哈</div>
                     </div>
                     <div class="col-md-4">
                         <div class="row text-center sign-with">
                             <div class="col-md-12">
                                 <h3 class="other-nw">
-                                    Sign in with</h3>
+                                    佳佳影视</h3>
                             </div>
                             <div class="col-md-12">
                                 <div class="btn-group btn-group-justified">
-                                    <a href="#" class="btn btn-primary">Facebook</a> <a href="#" class="btn btn-danger">
-                                        Google</a>
+                                    <a href="#" class="btn btn-primary">祝您</a> <a href="#" class="btn btn-danger">
+                                        开心</a>
                                 </div>
                             </div>
                         </div>
@@ -299,7 +298,7 @@ function login(){
 		  <div class="main-content">
 			<div class="header">
 				<div class="logo">
-					<a href="index.html"><h1>佳佳全球影视社区</h1></a>
+					<a href="index.html"><h1>全球影视社区</h1></a>
 				</div>
 				<div class="search">
 					<div class="search2">
@@ -319,81 +318,12 @@ function login(){
         
             <div id="defaultmenu" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">Home</a></li>	
+                    <li class="active"><a href="index.html">主页</a></li>	
                     <!-- Mega Menu -->
-					<li class="dropdown w3_megamenu-fw active"><a href="movies.html" data-toggle="dropdown" class="dropdown-toggle">Movies<b class="caret"></b></a>
-                        <ul class="dropdown-menu fullwidth">
-                            <li class="w3_megamenu-content">
-                                <div class="row">
-								<h5 class="movies-page">for movies page - <a href="movies.html">Click here</a> </h5>
-                                    <div class="col-sm-4">
-                                  		<h3 class="title">Now Showing</h3>
-										<ul class="mov_list">
-						<li>99%</li>
-						<li><a href="movie-single.html">Baahubali (Telugu) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li>100%</li>
-						<li><a href="movie-single.html">Baahubali (Hindi) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li>98%</li>
-						<li><a href="movie-single.html">Baahubali (English) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li>80%</li>
-						<li><a href="movie-single.html">Jurassic World (3D Hindi) (U/A)</a></li>
-					</ul>
-					<ul class="mov_list">
-						<li>65%</li>
-						<li><a href="movie-single.html">Hamari Adhuri Kahani (U)</a></li>
-					</ul>
-                                    </div><!-- end col-4 -->
-                                    <div class="col-sm-4 movie-dd">
-                                  		<h3 class="title">Next Change</h3>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-                                    </div><!-- end col-4 -->
-                                    <div class="col-sm-4 movie-dd">
-                                  		<h3 class="title">Comming Soon</h3>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>
-										<p><a href="movie-single.html">ABCD 2 (3D) (4DX)</a><span>... (Tomorrow, 19 Jun)</span></p>                                    		
-                                    </div><!-- end col-4 -->
-									<div class="clearfix"></div>
-									<div class="menu-featured-movies">
-										<h3 class="title">Featured Trailers</h3>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="{$Think.config.WEBSERVER}/public/film/images/mf1.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="{$Think.config.WEBSERVER}/public/film/images/mf2.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="{$Think.config.WEBSERVER}/public/film/images/mf3.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="{$Think.config.WEBSERVER}/public/film/images/mf3.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="{$Think.config.WEBSERVER}/public/film/images/mf3.jpg" alt="" /></a>
-										</div>
-										<div class="col-md-2 menu-featured-movies-img">
-											<a href="movie-single.html"><img src="{$Think.config.WEBSERVER}/public/film/images/mf3.jpg" alt="" /></a>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-                                </div><!-- end row -->
-                                <hr>
-                    
-							</li>
-                        </ul>
+					<li class="dropdown w3_megamenu-fw"><a href="movies.html" data-toggle="dropdown" class="dropdown-toggle">影视</a>
                     </li>
+
+
 					<li class="dropdown w3_megamenu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Events<b class="caret"></b></a>
                         <ul class="dropdown-menu half">
                             <li class="w3_megamenu-content withdesc">
@@ -444,7 +374,9 @@ function login(){
                             </li>
                         </ul>
 					</li>
-					<li class="dropdown w3_megamenu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Plays<b class="caret"></b></a>
+
+
+					<li class="dropdown w3_megamenu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">在线视频<b class="caret"></b></a>
                         <ul class="dropdown-menu half3">
                             <li class="w3_megamenu-content withoutdesc">
                                 <div class="row">
@@ -494,48 +426,8 @@ function login(){
                             </li>
                         </ul>
 					</li>
-					<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Sports<b class="caret"></b></a>
-							 <ul class="dropdown-menu half3">
-                            <li class="w3_megamenu-content withoutdesc">
-                                <div class="row">
-								<h5 class="movies-page">for sports page - <a href="sports.html">Click here</a> </h5>
-								<h3 class="title">Featured Sports</h3>
-                                    <div class="col-sm-3">
-                                    	<div class="e-movie">
-								<div class="e-movie-img">
-									<a href="sports.html"><img src="{$Think.config.WEBSERVER}/public/film/images/me1.jpg" alt="" /></a>
-									<a class="plays-go" href="#">Volleyball is a team sport</a>
-								</div>
-							</div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                    	<div class="e-movie">
-								<div class="e-movie-img">
-									<a href="sports.html"><img src="{$Think.config.WEBSERVER}/public/film/images/me2.jpg" alt="" /></a>
-									<a class="plays-go" href="#">Chase, we're going to win races.</a>
-								</div>
-							</div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                    	<div class="e-movie">
-								<div class="e-movie-img">
-									<a href="sports.html"><img src="{$Think.config.WEBSERVER}/public/film/images/me3.jpg" alt="" /></a>
-									<a class="plays-go" href="#">2015 The action or activity of skating on ice skates</a>
-								</div>
-							</div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                    	<div class="e-movie">
-								<div class="e-movie-img">
-									<a href="sports.html"><img src="{$Think.config.WEBSERVER}/public/film/images/me4.jpg" alt="" /></a>
-									<a class="plays-go" href="#">SVM Bowling & Gaming</a>
-								</div>
-							</div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                       <!-- end dropdown-menu -->
+					<li class="dropdown"><a href="{:url('index/index/blog')}">博客</a>
+					
 					</li>
 					<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Pages<b class="caret"></b></a>
 							 <ul class="dropdown-menu" role="menu">
@@ -561,7 +453,7 @@ function login(){
                 </ul><!-- end nav navbar-nav -->
                 
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Contact Us<b class="caret"></b></a>
+					<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">联系我们<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <form id="contact1" action="#" name="contactform" method="post">

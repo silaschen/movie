@@ -90,20 +90,20 @@ class Admin extends Common
 
 
 
-	#添加文章#
-	public function addessay(){
+	#addblog#
+	public function addblog(){
 		if(Request::instance()->isGet()){
 			$id = Request::instance()->param('id');
-			$info = Db::name('art_list')->where(['id'=>$id])->find();
-			return $this->fetch('addessay',['title'=>'添加文章','eq'=>2,'info'=>$info]);
+			$info = Db::name('blog')->where(['id'=>$id])->find();
+			return $this->fetch('addblog',['title'=>'addblog','eq'=>2,'info'=>$info]);
 		}else{
 			$data = Request::instance()->post();
 			if($data['id'] >0){
-				Db::name('art_list')->update($data,['id'=>$data['id']]);
+				Db::name('blog')->update($data,['id'=>$data['id']]);
 			}else{
 				$data['addtime'] =time();
-			$data['status'] =1;
-			Db::name('art_list')->insert($data);
+				$data['author'] = 'admin';
+				Db::name('blog')->insert($data);
 			}
 			
 			exit(json_encode(['code'=>1,'msg'=>'成功']));
@@ -115,7 +115,7 @@ class Admin extends Common
 	public function essaylist(){
 		if(Request::instance()->isGet()){
 
-			$list = Db::name('art_list')->where(['status'=>['egt',0]])->paginate(10);
+			$list = Db::name('blog')->where(['status'=>['egt',0]])->paginate(10);
 			// 把分页数据赋值给模板变量list
 
 			// 渲染模板输出
@@ -124,7 +124,7 @@ class Admin extends Common
 		}else{
 			$id = request()->post('id');
 			$t = request()->post('t');
-			$res = Db::name('art_list')->where(['id'=>$id])->update(['status'=>$t]);
+			$res = Db::name('blog')->where(['id'=>$id])->update(['status'=>$t]);
 			exit(json_encode(['code'=>1]));
 		}
 	
@@ -168,7 +168,7 @@ class Admin extends Common
 			$video['title'] = $data['title'];
 			$video['price'] = $data['price'];
 			$video['cover'] = $data['cover'];
-			
+			$video['cate'] = $data['cate'];		
 			$video['publishtime'] = strtotime($data['publishtime']);
 			$video['director'] = $data['director'];
 				
@@ -182,6 +182,38 @@ class Admin extends Common
 			}
 		}
 	}
+	
+
+	public function addonline(){
+
+	
+		if(\think\Request::instance()->isGet()){
+			return $this->fetch('addonline',['title'=>'add video','eq'=>1]);
+		}else{
+			$data = \think\Request::instance()->post();
+		
+			// 新增
+			$video['title'] = $data['title'];
+			$video['cate'] = $data['cate'];
+			$video['cover'] = $data['cover'];
+			
+			$video['publishtime'] = strtotime($data['publishtime']);
+			$video['director'] = $data['director'];
+			$video['address'] = $data['address'];
+			$r = Db::name('video')->insertGetId($video);
+
+			if($r){
+	
+				exit(json_encode(['code'=>1,'msg'=>'successfully upload']));
+			}else{
+				exit(json_encode(['code'=>0,'msg'=>'failed upload']));
+			}
+		}
+
+
+
+	}
+
 
 	public function AddTicket($r,$cinemas){
 		if(!empty($cinemas)){
