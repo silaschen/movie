@@ -32,9 +32,9 @@
 
 						{foreach name='comments' item='vo'}
 						<div class="comment">
-							<div class="client">
+						<!-- 	<div class="client">
 								<img src="{$Think.config.WEBSERVER}/public/film/images/c1.jpg" alt="">
-							</div>
+							</div> -->
 							<div class="client-message">
 								<p><a href="#">{$vo.nickname}</a><i class="fa fa-calendar"></i>{$vo.addtime|date="M d,H:i",###}</p>
 								<h6>{$vo.content}.</h6>
@@ -59,28 +59,9 @@
 		</div>
 		<div class="col-md-4 blog-categories">
 			<h3 class="post">最新博客</h3>
-			<p><a href="#">Celebrity Interviews</a> (34)</p>
-			<p><a href="#">Lorem Ipsum</a> (12)</p>
-			<p><a href="#">Bollwood Movies</a> (34)</p>
-			<p><a href="#">Tamil Movies</a> (12)</p>
-			<p><a href="#">Tollywood Movies</a> (34)</p>
-			<p><a href="#">Collywood Movies</a> (12)</p>
-			<p><a href="#">Celebrity Interviews</a> (34)</p>
-			<p><a href="#">Actors</a> (12)</p>
-			<p><a href="#">Actress</a> (34)</p>
-			<p><a href="#">Movie News</a> (12)</p>
-			<p><a href="#">Music</a> (34)</p>
-			<p><a href="#">Indian Music</a> (12)</p>
-			<p><a href="#">Celebrity Interviews</a> (34)</p>
-			<p><a href="#">Lorem Ipsum</a> (12)</p>
-			<p><a href="#">Celebrity Interviews</a> (34)</p>
-			<p><a href="#">Lorem Ipsum</a> (12)</p>
-			<p><a href="#">Celebrity Interviews</a> (34)</p>
-			<p><a href="#">Lorem Ipsum</a> (12)</p>
-			<p><a href="#">Celebrity Interviews</a> (34)</p>
-			<p><a href="#">Lorem Ipsum</a> (12)</p>
-			<p><a href="#">Celebrity Interviews</a> (34)</p>
-			<p><a href="#">Lorem Ipsum</a> (12)</p>
+			{foreach name='latest' item='lb'}
+			<p><a href="{:url('index/index/readblog',array('id'=>$lb['id']))}">{$lb.title}</a></p>
+			{/foreach}
 		</div>
 				<div class="clearfix"></div>
 	</div>
@@ -99,10 +80,11 @@ function commentblog(){
 
 	$.post("{:url('index/index/comment')}",{'comment':comment,'blogid':{$blog['id']}},function(data){
 			if(data.code === 1){
+					// <div class="client">
+					// 			<img src="{$Think.config.WEBSERVER}/public/film/images/c1.jpg" alt="">
+					// 		</div>
 					var commentblog = `<div class="comment">
-							<div class="client">
-								<img src="{$Think.config.WEBSERVER}/public/film/images/c1.jpg" alt="">
-							</div>
+						
 							<div class="client-message">
 								<p><a href="#">`+`{$Think.session.login_nick}`+`</a><i class="fa fa-calendar"></i>2 hours ago</p>
 								<h6>`+comment+`</h6>
