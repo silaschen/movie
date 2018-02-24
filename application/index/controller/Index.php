@@ -25,15 +25,11 @@ class Index extends Common
 	
 
 	public function playonline(){
-
 		$id = input('id');
 		$video = Db::name('video')->where(['id'=>$id])->find();
 			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/"); $this->assign('video',$video);
 		$this->UpdateVideoView($id);
 		return $this->fetch('playonline');
-
-
-
 	}
 
 
@@ -82,10 +78,6 @@ class Index extends Common
 		$top_total = Db::query("select sum(view) as total from video where cate=1");
 		$top = Db::query("select id,title,view from video where cate=1 order by view desc limit 6");
 		$this->assign(['top'=>$top]);
-
-
-
-
 		return $this->fetch('index');
     }
 	
@@ -185,6 +177,10 @@ class Index extends Common
 		$comment = Db::query("select a.content,a.addtime,b.nickname from blog_comment a left join user b ON a.uid=b.id where a.blogid='{$id}'");
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 		$this->assign('comments',$comment);
+
+		//最新博客
+		$latest = Db::query("select id,title from blog limit 15 order by addtime desc");
+		$this->assign('latest',$latest);
 		return $this->fetch('single');
 	}	
 
