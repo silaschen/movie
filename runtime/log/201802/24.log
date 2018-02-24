@@ -1,0 +1,1845 @@
+---------------------------------------------------------------
+[ 2018-02-24T14:36:11+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.008819s][吞吐率：113.39req/s] [内存消耗：641.20kb] [文件加载：57]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000388s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000568s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000219s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000442s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000288s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000232s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000219s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000229s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:36:22+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.005906s][吞吐率：169.32req/s] [内存消耗：539.12kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000412s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000546s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000180s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000425s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000278s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000236s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000178s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000194s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:40:10+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.007905s][吞吐率：126.50req/s] [内存消耗：538.77kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000425s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000559s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000203s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000435s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000275s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000236s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000206s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000216s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:40:47+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.006847s][吞吐率：146.05req/s] [内存消耗：538.02kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000366s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000547s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000208s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000441s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000280s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000226s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000196s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000222s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:43:32+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.007896s][吞吐率：126.65req/s] [内存消耗：538.77kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000404s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000564s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000194s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000452s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000279s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000240s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000216s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000236s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:44:21+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.006329s][吞吐率：158.00req/s] [内存消耗：539.62kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000345s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000589s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000211s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000405s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000294s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000236s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000209s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000221s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:46:15+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.007914s][吞吐率：126.36req/s] [内存消耗：538.27kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html, application/xhtml+xml, */*',
+  'accept-language' => 'zh-CN',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko',
+  'accept-encoding' => 'gzip, deflate',
+  'host' => '54.95.128.42',
+  'dnt' => '1',
+  'connection' => 'Keep-Alive',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000393s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000565s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000211s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000462s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000278s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000227s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000213s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000223s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:46:49+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.007548s][吞吐率：132.48req/s] [内存消耗：538.97kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'application/x-ms-application, image/jpeg, application/xaml+xml, image/gif, image/pjpeg, application/x-ms-xbap, */*',
+  'accept-language' => 'zh-CN',
+  'user-agent' => 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)',
+  'accept-encoding' => 'gzip, deflate',
+  'host' => '54.95.128.42',
+  'dnt' => '1',
+  'connection' => 'Keep-Alive',
+  'cookie' => 'PHPSESSID=39ruj8d562nb26i1cfuj0rmtd2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000395s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000522s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000197s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000408s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000272s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000218s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000201s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000210s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:47:01+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.008010s][吞吐率：124.84req/s] [内存消耗：538.77kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept-encoding' => 'gzip, deflate',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000452s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000557s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000201s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000435s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000274s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000230s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000207s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000215s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:48:48+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.007617s][吞吐率：131.29req/s] [内存消耗：538.77kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000382s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000605s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000187s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000395s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000252s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000212s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000185s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000225s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:49:28+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.005393s][吞吐率：185.42req/s] [内存消耗：538.53kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=tupu4jpv44bdiv9tgttoh5vt84',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000374s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000563s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000221s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000465s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000306s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000235s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000218s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000236s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:49:28+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001574s][吞吐率：635.31req/s] [内存消耗：287.53kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0',
+  'accept' => 'text/css,*/*;q=0.1',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://54.95.128.42/',
+  'cookie' => 'PHPSESSID=tupu4jpv44bdiv9tgttoh5vt84',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:49:28+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001388s][吞吐率：720.55req/s] [内存消耗：222.44kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0',
+  'accept' => 'text/css,*/*;q=0.1',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://54.95.128.42/',
+  'cookie' => 'PHPSESSID=tupu4jpv44bdiv9tgttoh5vt84',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:49:43+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.007944s][吞吐率：125.88req/s] [内存消耗：539.28kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000420s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000579s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000201s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000438s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000281s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000245s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000212s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000209s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:49:43+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001364s][吞吐率：733.14req/s] [内存消耗：221.98kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:49:44+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/images/bg_direction_nav.png
+[ info ] 54.95.128.42/public/film/images/bg_direction_nav.png [运行时间：0.003528s][吞吐率：283.46req/s] [内存消耗：222.84kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'images',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/public/film/css/flexslider.css',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:49:45+08:00 ] 172.31.16.59 106.38.1.118 POST /Index/index/login
+[ info ] 54.95.128.42/Index/index/login [运行时间：0.002061s][吞吐率：485.23req/s] [内存消耗：383.46kb] [文件加载：47]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'Index',
+    1 => 'index',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'content-length' => '28',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'origin' => 'http://54.95.128.42',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'referer' => 'http://54.95.128.42/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+  'email' => 'root',
+  'password' => 'chen1210',
+)
+[ info ] [ RUN ] app\index\controller\Index->login[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000443s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] select * from user where email='root' AND password='399763c4c820ca962b9211240dc09364' [ RunTime:0.000352s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:49:47+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001337s][吞吐率：748.05req/s] [内存消耗：221.98kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:49:48+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/bootstrap.css.map
+[ info ] 54.95.128.42/public/film/css/bootstrap.css.map [运行时间：0.001129s][吞吐率：885.81req/s] [内存消耗：221.52kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:02+08:00 ] 172.31.16.59 106.38.1.118 GET /index/index/selectshow/id/16.html
+[ info ] 54.95.128.42/index/index/selectshow/id/16.html [运行时间：0.011193s][吞吐率：89.34req/s] [内存消耗：536.07kb] [文件加载：56]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'index',
+    2 => 'selectshow',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+  'id' => '16',
+)
+[ info ] [ RUN ] app\index\controller\Index->selectshow[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/selectshow.html [ array (
+  0 => 'moviedates',
+  1 => 'film',
+  2 => 'webserver',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000402s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] select * from video where id='16' [ RunTime:0.000354s ]
+[ sql ] [ SQL ] select b.id, b.time,b.cinemaid,b.btime,b.etime,c.name,c.address from  tickets b  JOIN cinemas c ON b.cinemaid=c.id where b.videoid='16' [ RunTime:0.000288s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000493s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `id` = 16 LIMIT 1 [ RunTime:0.000233s ]
+[ sql ] [ SQL ] update video set view='4' where id='16' [ RunTime:0.002476s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:02+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001377s][吞吐率：726.16req/s] [内存消耗：222.07kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/index/index/selectshow/id/16.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:02+08:00 ] 172.31.16.59 106.38.1.118 GET /index/index/selectshow/id/images/movie-show.jpg
+[ info ] 54.95.128.42/index/index/selectshow/id/images/movie-show.jpg [运行时间：0.005354s][吞吐率：186.77req/s] [内存消耗：423.05kb] [文件加载：58]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'index',
+    2 => 'selectshow',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/index/index/selectshow/id/16.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+  'id' => 'images',
+)
+[ info ] [ RUN ] app\index\controller\Index->selectshow[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/selectshow.html [ array (
+  0 => 'moviedates',
+  1 => 'film',
+  2 => 'webserver',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000355s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] select * from video where id='images' [ RunTime:0.000350s ]
+[ sql ] [ SQL ] select b.id, b.time,b.cinemaid,b.btime,b.etime,c.name,c.address from  tickets b  JOIN cinemas c ON b.cinemaid=c.id where b.videoid='images' [ RunTime:0.000886s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000499s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `id` = 0 LIMIT 1 [ RunTime:0.000221s ]
+[ sql ] [ SQL ] update video set view='1' where id='0' [ RunTime:0.000192s ]
+[ error ] [8]未定义数组下标: 0[/var/www/movie/runtime/temp/f348d36ad0e62cc1d2b81868130a8393.php:517]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:02+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/bootstrap.css.map
+[ info ] 54.95.128.42/public/film/css/bootstrap.css.map [运行时间：0.001417s][吞吐率：705.76req/s] [内存消耗：221.52kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:05+08:00 ] 172.31.16.59 106.38.1.118 GET /Index/index/payment/cid/5/vid/16/time/13%3A30/tid/16.html
+[ info ] 54.95.128.42/Index/index/payment/cid/5/vid/16/time/13%3A30/tid/16.html [运行时间：0.007768s][吞吐率：128.73req/s] [内存消耗：606.18kb] [文件加载：56]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'Index',
+    1 => 'index',
+    2 => 'payment',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/index/index/selectshow/id/16.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+  'cid' => '5',
+  'vid' => '16',
+  'time' => '13:30',
+  'tid' => '16',
+)
+[ info ] [ RUN ] app\index\controller\Index->payment[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/payment.html [ array (
+  0 => 'cid',
+  1 => 'film',
+  2 => 'time',
+  3 => 'cinema',
+  4 => 'ticket',
+  5 => 'webserver',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000367s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tickets` [ RunTime:0.000577s ]
+[ sql ] [ SQL ] SELECT * FROM `tickets` WHERE  `id` = 16 LIMIT 1 [ RunTime:0.000285s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000436s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `id` = 16 LIMIT 1 [ RunTime:0.000229s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cinemas` [ RunTime:0.000452s ]
+[ sql ] [ SQL ] SELECT * FROM `cinemas` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000211s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:05+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001258s][吞吐率：794.98req/s] [内存消耗：222.10kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/Index/index/payment/cid/5/vid/16/time/13%3A30/tid/16.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:05+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/bootstrap.css.map
+[ info ] 54.95.128.42/public/film/css/bootstrap.css.map [运行时间：0.001137s][吞吐率：879.49req/s] [内存消耗：221.52kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:11+08:00 ] 172.31.16.59 106.38.1.118 GET /Index/index/payment/cid/5/vid/16/time/13%3A30/tid/index.html
+[ info ] 54.95.128.42/Index/index/payment/cid/5/vid/16/time/13%3A30/tid/index.html [运行时间：0.005223s][吞吐率：191.46req/s] [内存消耗：504.71kb] [文件加载：54]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'Index',
+    1 => 'index',
+    2 => 'payment',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/Index/index/payment/cid/5/vid/16/time/13%3A30/tid/16.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+  'cid' => '5',
+  'vid' => '16',
+  'time' => '13:30',
+  'tid' => 'index',
+)
+[ info ] [ RUN ] app\index\controller\Index->payment[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/payment.html [ array (
+  0 => 'cid',
+  1 => 'film',
+  2 => 'time',
+  3 => 'cinema',
+  4 => 'ticket',
+  5 => 'webserver',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000347s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tickets` [ RunTime:0.000568s ]
+[ sql ] [ SQL ] SELECT * FROM `tickets` WHERE  `id` = 0 LIMIT 1 [ RunTime:0.000253s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000432s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `id` = 16 LIMIT 1 [ RunTime:0.000231s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cinemas` [ RunTime:0.000405s ]
+[ sql ] [ SQL ] SELECT * FROM `cinemas` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000210s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:11+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001182s][吞吐率：845.97req/s] [内存消耗：222.10kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/Index/index/payment/cid/5/vid/16/time/13%3A30/tid/index.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:12+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/bootstrap.css.map
+[ info ] 54.95.128.42/public/film/css/bootstrap.css.map [运行时间：0.001123s][吞吐率：890.32req/s] [内存消耗：221.52kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:15+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.005431s][吞吐率：184.12req/s] [内存消耗：538.02kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000373s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000592s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000190s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000421s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000280s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000233s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000207s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000214s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:15+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001162s][吞吐率：860.55req/s] [内存消耗：221.98kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:15+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/bootstrap.css.map
+[ info ] 54.95.128.42/public/film/css/bootstrap.css.map [运行时间：0.001187s][吞吐率：842.40req/s] [内存消耗：221.52kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:16+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/images/bg_direction_nav.png
+[ info ] 54.95.128.42/public/film/images/bg_direction_nav.png [运行时间：0.003403s][吞吐率：293.86req/s] [内存消耗：222.84kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'images',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/public/film/css/flexslider.css',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:25+08:00 ] 172.31.16.59 106.38.1.118 GET /index/index/selectshow/id/19.html
+[ info ] 54.95.128.42/index/index/selectshow/id/19.html [运行时间：0.009476s][吞吐率：105.53req/s] [内存消耗：455.08kb] [文件加载：54]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'index',
+    2 => 'selectshow',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+  'id' => '19',
+)
+[ info ] [ RUN ] app\index\controller\Index->selectshow[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/selectshow.html [ array (
+  0 => 'moviedates',
+  1 => 'film',
+  2 => 'webserver',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000407s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] select * from video where id='19' [ RunTime:0.000362s ]
+[ sql ] [ SQL ] select b.id, b.time,b.cinemaid,b.btime,b.etime,c.name,c.address from  tickets b  JOIN cinemas c ON b.cinemaid=c.id where b.videoid='19' [ RunTime:0.000312s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000494s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `id` = 19 LIMIT 1 [ RunTime:0.000205s ]
+[ sql ] [ SQL ] update video set view='5' where id='19' [ RunTime:0.002692s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:25+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001336s][吞吐率：748.45req/s] [内存消耗：222.07kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/index/index/selectshow/id/19.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:26+08:00 ] 172.31.16.59 106.38.1.118 GET /index/index/selectshow/id/images/movie-show.jpg
+[ info ] 54.95.128.42/index/index/selectshow/id/images/movie-show.jpg [运行时间：0.004157s][吞吐率：240.55req/s] [内存消耗：421.95kb] [文件加载：58]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'index',
+    2 => 'selectshow',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/index/index/selectshow/id/19.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+  'id' => 'images',
+)
+[ info ] [ RUN ] app\index\controller\Index->selectshow[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/selectshow.html [ array (
+  0 => 'moviedates',
+  1 => 'film',
+  2 => 'webserver',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000357s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] select * from video where id='images' [ RunTime:0.000326s ]
+[ sql ] [ SQL ] select b.id, b.time,b.cinemaid,b.btime,b.etime,c.name,c.address from  tickets b  JOIN cinemas c ON b.cinemaid=c.id where b.videoid='images' [ RunTime:0.000282s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000501s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `id` = 0 LIMIT 1 [ RunTime:0.000220s ]
+[ sql ] [ SQL ] update video set view='1' where id='0' [ RunTime:0.000192s ]
+[ error ] [8]未定义数组下标: 0[/var/www/movie/runtime/temp/f348d36ad0e62cc1d2b81868130a8393.php:517]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:26+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/bootstrap.css.map
+[ info ] 54.95.128.42/public/film/css/bootstrap.css.map [运行时间：0.001157s][吞吐率：864.27req/s] [内存消耗：221.52kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:27+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.005323s][吞吐率：187.87req/s] [内存消耗：538.02kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000336s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000576s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000215s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000434s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000290s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000257s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000200s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000224s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:27+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001265s][吞吐率：790.48req/s] [内存消耗：221.98kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:27+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/bootstrap.css.map
+[ info ] 54.95.128.42/public/film/css/bootstrap.css.map [运行时间：0.003268s][吞吐率：306.00req/s] [内存消耗：222.26kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:28+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/images/bg_direction_nav.png
+[ info ] 54.95.128.42/public/film/images/bg_direction_nav.png [运行时间：0.001258s][吞吐率：794.98req/s] [内存消耗：222.09kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'images',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/public/film/css/flexslider.css',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:34+08:00 ] 172.31.16.59 106.38.1.118 GET /index/index/readblog/id/5.html
+[ info ] 54.95.128.42/index/index/readblog/id/5.html [运行时间：0.006001s][吞吐率：166.64req/s] [内存消耗：578.95kb] [文件加载：56]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'index',
+    2 => 'readblog',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+  'id' => '5',
+)
+[ info ] [ RUN ] app\index\controller\Index->readblog[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/single.html [ array (
+  0 => 'blog',
+  1 => 'webserver',
+  2 => 'comments',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000369s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `blog` [ RunTime:0.000578s ]
+[ sql ] [ SQL ] SELECT * FROM `blog` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000290s ]
+[ sql ] [ SQL ] select a.content,a.addtime,b.nickname from blog_comment a left join user b ON a.uid=b.id where a.blogid='5' [ RunTime:0.000262s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:35+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001136s][吞吐率：880.23req/s] [内存消耗：222.07kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/index/index/readblog/id/5.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:35+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/bootstrap.css.map
+[ info ] 54.95.128.42/public/film/css/bootstrap.css.map [运行时间：0.001258s][吞吐率：794.83req/s] [内存消耗：221.52kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:38+08:00 ] 172.31.16.59 106.38.1.118 GET /
+[ info ] 54.95.128.42/ [运行时间：0.005413s][吞吐率：184.74req/s] [内存消耗：538.02kb] [文件加载：55]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Index->index[ /var/www/movie/application/index/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /var/www/movie/application/index/view/index/index.html [ array (
+  0 => 'slides',
+  1 => 'slidetwo',
+  2 => 'now',
+  3 => 'week',
+  4 => 'will',
+  5 => 'day',
+  6 => 'blog',
+  7 => 'online',
+  8 => 'webserver',
+  9 => 'top',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000359s ] mysql:host=127.0.0.1;dbname=film
+[ sql ] [ SQL ] SHOW COLUMNS FROM `slides` [ RunTime:0.000560s ]
+[ sql ] [ SQL ] SELECT * FROM `slides` [ RunTime:0.000199s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `video` [ RunTime:0.000426s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 1 [ RunTime:0.000273s ]
+[ sql ] [ SQL ] SELECT * FROM `video` WHERE  `cate` = 2 [ RunTime:0.000231s ]
+[ sql ] [ SQL ] select sum(view) as total from video where cate=1 [ RunTime:0.000202s ]
+[ sql ] [ SQL ] select id,title,view from video where cate=1 order by view desc limit 6 [ RunTime:0.000214s ]
+---------------------------------------------------------------
+[ 2018-02-24T14:50:39+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/megamenu.css
+[ info ] 54.95.128.42/public/film/css/megamenu.css [运行时间：0.001181s][吞吐率：846.65req/s] [内存消耗：221.98kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'text/css,*/*;q=0.1',
+  'referer' => 'http://54.95.128.42/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:39+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/css/bootstrap.css.map
+[ info ] 54.95.128.42/public/film/css/bootstrap.css.map [运行时间：0.001155s][吞吐率：865.88req/s] [内存消耗：221.52kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-02-24T14:50:39+08:00 ] 172.31.16.59 106.38.1.118 GET /public/film/images/bg_direction_nav.png
+[ info ] 54.95.128.42/public/film/images/bg_direction_nav.png [运行时间：0.003415s][吞吐率：292.82req/s] [内存消耗：222.84kb] [文件加载：40]
+[ info ] [ LANG ] /var/www/movie/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'film',
+    2 => 'images',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '54.95.128.42',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://54.95.128.42/public/film/css/flexslider.css',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=3bl3tdi04bcvd4pidj7ao3gmv4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
