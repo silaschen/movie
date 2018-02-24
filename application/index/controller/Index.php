@@ -179,7 +179,7 @@ class Index extends Common
 		$this->assign('comments',$comment);
 
 		//最新博客
-		$latest = Db::query("select id,title from blog limit 15 order by addtime desc");
+		$latest = Db::query("select id,title from blog order by addtime desc limit 15");
 		$this->assign('latest',$latest);
 		return $this->fetch('single');
 	}	
