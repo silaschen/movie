@@ -140,15 +140,16 @@ class Admin extends Common
 			$word = input('word');
 			$map = array();
 			if($word) $map['title'] = array('like','%'.$word.'%');
-
-			$list = Db::name('video')->where(['status'=>['egt',0]])->paginate(10);
+			$list = Db::name('video')->paginate(10);
 			$page = $list->render();
 			$this->assign('page',$page);// 赋值分页输出
 			//分页跳转的时候保证查询条件
 			$this->assign('list',$list);
-			return $this->fetch('videolist',['title'=>'videolist']);
+			return $this->fetch('videolist',['title'=>'videolist','eq'=>1]);
 		}else{
-			
+			$id = input('id');
+			Db::name('video')->where(['id'=>$id])->delete();
+			exit(json_encode(['ret'=>1,'msg'=>'删除成功']));
 		}
 	}
 
@@ -248,6 +249,29 @@ class Admin extends Common
 				}
 		}
 
+	}
+
+
+	//博客列表
+		public function bloglist(){
+		// $this->IsAdm();
+		if(\think\Request::instance()->isGet()){
+			$this->title = ' 博客列表';
+			$p = input('p')?input('p'):1;
+			$word = input('word');
+			$map = array();
+			if($word) $map['title'] = array('like','%'.$word.'%');
+			$list = Db::name('blog')->paginate(10);
+			$page = $list->render();
+			$this->assign('page',$page);// 赋值分页输出
+			//分页跳转的时候保证查询条件
+			$this->assign('list',$list);
+			return $this->fetch('bloglist',['title'=>'博客列表','eq'=>2]);
+		}else{
+			$id = input('id');
+			Db::name('blog')->where(['id'=>$id])->delete();
+			exit(json_encode(['ret'=>1,'msg'=>'删除成功']));
+		}
 	}
 
 

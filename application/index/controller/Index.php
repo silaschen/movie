@@ -51,12 +51,13 @@ class Index extends Common
 					$v['publishtime'] = date('Y-m-d',$v['publishtime']);
 					 $week[] = $v;
 
-			}else if($v['publishtime']>$weekfinal){
+			}else if($v['publishtime']>=$weekfinal){
 					$v['publishtime'] = date('Y-m-d',$v['publishtime']);
 					 $will[] = $v;
 			}
 
 		}
+
 		//blog
 		$redis = \redisObj\redisTool::getRedis();
 	

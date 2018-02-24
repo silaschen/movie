@@ -4,7 +4,7 @@
   <div class="box box-solid">
     <div class="box-header with-border">
       <h3 class="box-title">视频列表</h3>
-      <a href="{:url('index/admin/addvideo')}" class='btn btn-success btn-xs pull-right'>添加视频</a>
+      <a href="{:url('Sys/addvideo')}" class='btn btn-success btn-xs pull-right'>添加视频</a>
     </div>
     <div class="box-body">
       <form method="GET" action="{:url('Sys/artlist')}" id='form'>
@@ -13,7 +13,7 @@
           <div class="input-group">
             <input name="word" type='text' class='form-control' value="" placeholder='标题关键词搜索..'>
             <span class="input-group-addon" onclick="$('#form').submit();"><i class="fa fa-search"></i></span>
-            {if condition="$_GET['word'] neq ''"}
+              {if condition="$_GET['word'] neq ''"}
             <a title='清除条件' class="input-group-addon" href="{:url('Sys/artlist')}"><i class="fa fa-remove"></i></a>
             {/if}
           </div>
@@ -29,17 +29,14 @@
         <tbody>
           <tr>
             <th>ID</th>
-            <th>电影名称</th>
-            <th>封面</th>
-            <th>类型</th>
-            <th>票价</th>
-            <th>人气值</th>
+            <th>标题</th>
+            <th>写作时间</th>
             <th>操作</th>
           </tr>
           {volist name="list" id="vo"}
           <tr>
-            <td>{$vo.id}</td><td>{$vo.title}</td><td><if condition="$vo.cover neq ''"><a href="{$vo.cover}" target='_blank'><i class='fa fa-photo'></i></a></if></td><td>{if condition="$vo.cate eq '1'"}影院{else/}在线{/if}</td>
-            <td>{$vo.price}</td><td>{$vo.view}</td>
+            <td>{$vo.id}</td><td>{$vo.title}</td>
+        <td>{$vo.addtime|date="Y-m-d H:i",###}</td>
           
             <td>
               <div class="btn-group">
@@ -49,7 +46,7 @@
                   <span class="sr-only">+</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="{:url('Sys/addvideo',array('id'=>$vo['id']))}">编辑</a></li>
+                  <li><a href="{:url('index/admin/addblog',array('id'=>$vo['id']))}">编辑</a></li>
            
                   <li class="divider"></li>
                   <li><a href="javascript:setstat({$vo.id},-1);">删除</a></li>

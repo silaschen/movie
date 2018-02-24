@@ -31,7 +31,7 @@
                     <div id="files" class="files">
                     </div>
                     <div class='showcover'>
-                          <img src="{$info.cover}">
+                          <img src="{$Think.config.WEBSERVER}/{$info.cover}">
                     </div>
                 <input class='hide' name='cover' id='cover' value="{$info.cover}">
             </div>
@@ -42,7 +42,7 @@
           
             <div class="form-group">
                 <label>精彩片段url</label>
-                <input type="url" name="frameurl" class="form-control">
+                <input type="url" name="frameurl" class="form-control" value="{$info.frameurl}">
             </div>
 
             
