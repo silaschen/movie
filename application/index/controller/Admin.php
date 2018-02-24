@@ -140,8 +140,7 @@ class Admin extends Common
 			$word = input('word');
 			$map = array();
 			if($word) $map['title'] = array('like','%'.$word.'%');
-			$map['status'] = array('egt',0);
-		
+
 			$list = Db::name('video')->where(['status'=>['egt',0]])->paginate(10);
 			$page = $list->render();
 			$this->assign('page',$page);// 赋值分页输出
