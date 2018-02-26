@@ -29,7 +29,9 @@
 <div class="wrapper">
   {block name="head"}{include file="admin:head" /}{/block}
   <!-- Left side column. contains the logo and sidebar -->
+  {if condition="$Think.session.login_cinema_status neq 1"}
   {block name="left"}{include file="admin:left" /}{/block}
+  {/if}
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

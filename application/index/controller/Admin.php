@@ -274,6 +274,74 @@ class Admin extends Common
 		}
 	}
 
+	//判断是否影院登陆
+	protected function IsCinema(){
+			if(!\think\Session::get('login_cinema')){
+				$this->redirect("index/admin/cinemalogin");
+			}
+	}
+
+
+	//影院后台登录
+	public function cinemalogin(){
+
+		if($_SERVER['REQUEST_METHOD'] === 'GET'){
+
+			return $this->fetch('cinema_login');
+		}else{
+			$user = input('user');
+			$pwd = md5(input('pwd'));
+
+			$cinema = Db::query("select * from cinemas where user='$user' AND pwd='$pwd'")[0];
+			if($cinema){
+				\think\Session::set('login_cinema',$cinema['id']);
+				\think\Session::set('login_cinema_status',1);
+				exit(json_encode(['code'=>1,'msg'=>'登陆成功']));
+			}
+			exit(json_encode(['code'=>0,'msg'=>'错误的用户名或密码']));
+
+
+
+		}
+
+	}
+
+
+	//验票列表
+		public function ordercheck(){
+		$this->IsCinema();
+		if(\think\Request::instance()->isGet()){
+			$this->title = '订单列表';
+			$p = input('p')?input('p'):1;
+			$word = input('word');
+			$map = array();
+			// if($word) $map['v.title'] = array('like','%'.$word.'%');
+			$map['fo.cinemaid'] = \think\Session::get('login_cinema');
+			$list = Db::name('film_order')
+			->alias('fo')
+			->join("video v","fo.videoid=v.id")
+			->join("cinemas c","fo.cinemaid=c.id")
+			->join("user u","fo.uid=u.id")
+			->field("fo.id,fo.orderid,fo.time,v.title,fo.money,c.name,fo.addtime,u.nickname,u.phone,fo.status")
+			->where($map)
+			->paginate(10);
+			$page = $list->render();
+			$this->assign('page',$page);// 赋值分页输出
+			//分页跳转的时候保证查询条件
+			$this->assign('list',$list);
+			return $this->fetch('checklist',['title'=>'博客列表','eq'=>2]);
+		}else{
+			$id = input('id');
+			$order = Db::query("select * from film_order where id='{$id}' AND status=2")[0];
+			if($order){
+				Db::execute("update film_order SET status=3 where id='$id'");
+				exit(json_encode(['code'=>1,'msg'=>'出票成功']));
+			}
+
+			exit(json_encode(['code'=>0,'msg'=>'出票失败']));
+		}
+	}
+
 
 
 }

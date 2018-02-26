@@ -156,14 +156,40 @@ class Index extends Common
 		}
 
 	}
+
+
+	protected function LoginStstus(){
+		if(\think\Session::get('login_uid') === null){
+			return false;
+		}
+		return true;
+
+	}
+	//下单
+	public function orderfilm(){
+		if(!$this->LoginStstus()){
+			exit(json_encode(['code'=>0,'msg'=>'未登录，请先登录再购票']));
+		}
+		$data = $_POST;
+		$data['uid'] = \think\Session::get('login_uid');
+		$data['money'] = Db::query("select price from video where id='{$data['videoid']}'")[0]['price'];
+		$data['addtime'] = time();
+		$data['status'] = 2;
+		$data['payinfo'] = json_encode(['banknum'=>$data['banknum'],'bankname'=>$data['bankname']]);
+		$data['orderid'] = md5($data['uid'].$data['money'].$data['videoid'].time());
+		unset($data['bankname']);
+		unset($data['banknum']);
+		Db::name('film_order')->insert($data);
+		exit(json_encode(['code'=>1,'msg'=>'下单成功']));
+	}
+
+
 	//blog
 	public function blog(){
 		$blogs = Db::query("select * from blog order by addtime desc");
 		$this->assign('blogs',$blogs);
 		$this->assign('webserver',\think\Config::get('WEBSERVER')."/");
 		return $this->fetch('blog');
-
-
 	}
 
 	//movies
