@@ -19,8 +19,6 @@ class Index extends Common
         }
 	var_dump($img);
 
-
-
 	}
 	
 
@@ -29,7 +27,8 @@ class Index extends Common
 		$video = Db::name('video')->where(['id'=>$id])->find();
 			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/"); $this->assign('video',$video);
 		$this->UpdateVideoView($id);
-		return $this->fetch('playonline');
+		$recommend = Db::query("select id,title from video where cate=2 and id not in ($id) order by view desc limit 8");
+		return $this->fetch('playonline',['recommend'=>$recommend]);
 	}
 
 
