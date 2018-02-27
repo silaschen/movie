@@ -223,7 +223,7 @@ class Index extends Common
 
 
 	public function myticket(){
-		$sql = sprintf("select o.id,o.addtime,o.status,v.title,c.name,o.time,o.money from film_order o join video v ON o.videoid=v.id join cinemas c ON o.cinemaid=c.id where o.uid=%d",\think\Session::get('login_uid'));
+		$sql = sprintf("select o.id,o.orderid,o.addtime,o.status,v.title,c.name,o.time,o.money,t.btime,t.etime from film_order o join video v ON o.videoid=v.id join cinemas c ON o.cinemaid=c.id join tickets t ON o.ticketid=t.id where o.uid=%d",\think\Session::get('login_uid'));
 		$ticket = Db::query($sql);
 		return $this->fetch('myticket',['ticket'=>$ticket]);
 	} 
