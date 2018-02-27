@@ -44,11 +44,17 @@ class Admin extends Common
 
 	public function userlist(){
 
-		$list = Db::name('user')->paginate(3);
-		// 把分页数据赋值给模板变量list
-		
-		// 渲染模板输出
-		return $this->fetch('userlist',['eq'=>1,'title'=>'list','list'=>$list]);
+			$this->title = '用户列表';
+			$p = input('p')?input('p'):1;
+			$word = input('word');
+			$map = array();
+			if($word) $map['title'] = array('like','%'.$word.'%');
+			$list = Db::name('user')->where($map)->paginate(10);
+			$page = $list->render();
+			$this->assign('page',$page);// 赋值分页输出
+			//分页跳转的时候保证查询条件
+			$this->assign('list',$list);
+			return $this->fetch('userlist',['title'=>'用户列表','eq'=>'用户管理']);
 	}
 	
 
@@ -273,6 +279,62 @@ class Admin extends Common
 			exit(json_encode(['ret'=>1,'msg'=>'删除成功']));
 		}
 	}
+
+
+	//添加公告编辑
+	public function addnotice(){
+		if($_SERVER['REQUEST_METHOD'] === 'GET'){
+			$id = input('id');
+			if($id){
+				$notice = Db::query("SELECT * FROM notice WHERE id=$id")[0];
+				$this->assign('info',$notice);
+			}
+			return $this->fetch('addnotice');
+		}else{
+			$data = $_POST;
+
+			if($data['id']){
+				//更新公告
+				$sql = sprintf("UPDATE notice set title='%s',content='%s' WHERE id=%d",$data['title'],$data['content'],$data['id']);
+			}else{
+				$sql = sprintf("insert into notice(title,content,addtime) VALUES ('%s','%s','%s')",$data['title'],$data['content'],time());
+			}
+
+			$ret = Db::execute($sql);
+
+			if($ret){
+				exit(json_encode(['code'=>1,'msg'=>'操作成功']));
+			}
+
+
+		}
+	}
+
+
+		//公告列表
+	public function noticelist(){
+		// $this->IsAdm();
+		if(\think\Request::instance()->isGet()){
+			$this->title = '公告列表';
+			$p = input('p')?input('p'):1;
+			$word = input('word');
+			$map = array();
+			if($word) $map['title'] = array('like','%'.$word.'%');
+			$list = Db::name('notice')->paginate(10);
+			$page = $list->render();
+			$this->assign('page',$page);// 赋值分页输出
+			//分页跳转的时候保证查询条件
+			$this->assign('list',$list);
+			return $this->fetch('noticelist',['title'=>'博客列表','eq'=>2]);
+		}else{
+			$id = input('id');
+			Db::name('notice')->where(['id'=>$id])->delete();
+			exit(json_encode(['ret'=>1,'msg'=>'删除成功']));
+		}
+	}
+
+
+
 
 	//判断是否影院登陆
 	protected function IsCinema(){

@@ -33,10 +33,22 @@ class Index extends Common
 
 
     public function index(){
+    	//首页大图轮播
 		$slides = Db::name('slides')->select();
 		$this->assign('slides',$slides);
+
+		//首页公告
+
+		$notice = Db::query("select * from notice order by id desc limit 6");
+		$this->assign('notice',$notice);
+		var_dump($notice);
+
+		//轮播电影
 		$movie = Db::name('video')->where(['cate'=>1])->select();
 		$this->assign('slidetwo',$movie);
+
+
+		//正在热映，本周，即将热映
 		$weekfinal = strtotime(date('Y-m-d', (time() + (7 - (date('w') == 0 ? 7 : date('w'))) * 24 * 3600+86400)));
 		$day = strtotime(date('Y-m-d',time()));
 		$time = $day+86400;
@@ -57,7 +69,7 @@ class Index extends Common
 
 		}
 
-		//blog
+		//博客
 		$redis = \redisObj\redisTool::getRedis();
 	
 		if($redis->get('blogindex')){
@@ -69,8 +81,8 @@ class Index extends Common
 			$redis->setkey('blogindex',3600*24,json_encode($blog));
 		}
 
-		$logined = \redisObj\redisTool::getRedis()->range('loginuser',0,-1);
-		//online
+		
+		//在线视频
 		$online = Db::name('video')->where(['cate'=>2])->select();
 		$this->assign(['now'=>$now,'week'=>$week,'will'=>$will,'day'=>$day,'blog'=>$blog,'online'=>$online]);	
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
@@ -78,6 +90,7 @@ class Index extends Common
 		$top_total = Db::query("select sum(view) as total from video where cate=1");
 		$top = Db::query("select id,title,view from video where cate=1 order by view desc limit 6");
 		$this->assign(['top'=>$top]);
+
 		return $this->fetch('index');
     }
 	

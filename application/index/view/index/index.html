@@ -35,10 +35,21 @@
 				});
 			 </script>
          </div>
+
+         <!-- 公告 -->
 		 <div class="col-md-4 banner-right">
-			<h4>虚位以待</h4>
-			<p>this is the note place.All the warning and news will play here.</p>	
+			
+
+		 			<div class="list-group">
+						{foreach name='notice' item='noti'}
+					  <a href="#" class="list-group-item list-group-item-info">{$noti.title}</a>
+					{/foreach}
+					</div>
+
+
 		 </div>
+
+		<!--  公告 -->
 		 <div class="clearfix"></div>
 	</div>
 				<div class="review-slider">
@@ -115,11 +126,11 @@
 						                     </div>
 								              <div class="tab_desc">
 													<a href="{:url('index/index/selectshow',array('id'=>$nvo['id']))}">现在预订</a>
-													<div class="percentage-w-t-s">
+												<!-- 	<div class="percentage-w-t-s">
 														<h5>97</h5>
 														<p>人 <br> Want to see</p>
 														<div class="clearfix"></div>
-													</div>
+													</div> -->
 											  </div>
 										  </div>
 										</li>
@@ -150,11 +161,11 @@
 						                     </div>
 								              <div class="tab_desc">
 													<a href="{:url('index/index/selectshow',array('id'=>$nvo['id']))}">现在预订</a>
-													<div class="percentage-w-t-s">
+												<!-- 	<div class="percentage-w-t-s">
 														<h5>97</h5>
 														<p>% <br> Want to see</p>
 														<div class="clearfix"></div>
-													</div>
+													</div> -->
 											  </div>
 										  </div>
 										</li>
@@ -186,11 +197,11 @@
 						                     </div>
 								              <div class="tab_desc">
 													<a href="{:url('index/index/selectshow',array('id'=>$nvo['id']))}">现在预订</a>
-													<div class="percentage-w-t-s">
+												<!-- 	<div class="percentage-w-t-s">
 														<h5>97</h5>
 														<p>% <br> Want to see</p>
 														<div class="clearfix"></div>
-													</div>
+													</div> -->
 											  </div>
 										  </div>
 										</li>
