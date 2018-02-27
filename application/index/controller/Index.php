@@ -7,21 +7,6 @@ use app\index\controller\Common;
 
 class Index extends Common
 {
-
-	public function test(){
-
-		
-	try {
-            $img = "bb";
-		throw new \Exception('error'); 
-        } catch (\Exception $e) {
-            $img =  "aaaaa";
-        }
-	var_dump($img);
-
-	}
-	
-
 	public function playonline(){
 		$id = input('id');
 		$video = Db::name('video')->where(['id'=>$id])->find();
@@ -95,6 +80,8 @@ class Index extends Common
     }
 	
 
+
+    //注册
 	public function register(){
 			$data = \think\Request::instance()->post();
 			$data['password'] = md5($data['password']);
@@ -107,6 +94,8 @@ class Index extends Common
 			}
 		
 	}
+
+
 	//login
 	public function login(){
 		$email =\think\Request::instance()->post('email');
@@ -123,15 +112,18 @@ class Index extends Common
 	}
 	
 
-
+	//设置状态
 	public function SetUserLogin($user){
 		
 		\think\Session::set('login_uid',$user[0]['id']);
 		\think\Session::set('login_nick',$user[0]['nickname']);
 	//	\redisObj\redisTool::getRedis()->lpush('loginuser',$user['id']);
 	}
+
+
+
 	/**
-	 *show select
+	 *购票详情页
 	*/
 	public function selectshow(){
 		$id = input('id');
@@ -147,7 +139,7 @@ class Index extends Common
 		return $this->fetch('selectshow');
 	}
 	
-	//payment
+	//下单页
 	public function payment(){
 		if(Request::instance()->isGet()){
 			$vid = input('vid');
@@ -170,6 +162,8 @@ class Index extends Common
 	}
 
 
+
+
 	protected function LoginStstus(){
 		if(\think\Session::get('login_uid') === null){
 			return false;
@@ -177,6 +171,9 @@ class Index extends Common
 		return true;
 
 	}
+
+
+
 	//下单
 	public function orderfilm(){
 		if(!$this->LoginStstus()){
@@ -209,6 +206,8 @@ class Index extends Common
 		return $this->fetch('movies');
 	}
 	
+
+	//读博客
 	public function readblog(){
 		$id = input('id');
 		$blog = Db::name('blog')->where(array('id'=>$id))->find();
@@ -223,6 +222,9 @@ class Index extends Common
 		return $this->fetch('single');
 	}	
 
+
+
+	//评论
 	public function comment(){
 		if(Request::instance()->isPost()){
 			$data = Request::instance()->post();
@@ -278,12 +280,6 @@ class Index extends Common
 		$model = Db::name('video');
 		$list = $model
 		->where($map)->paginate(6,false,['query' => request()->param()])->toArray();
-        for ($i=0; $i < count($list['data']); $i++) { 
-             //get the thumb for video
-                $list['data'][$i]['cover'] = $this->thumb($list['data'][$i]['key']);
-        }	
-
-
 		// 获取分页显示
 		$page = $model
         ->where($map)->paginate(6,false,['query' => request()->param()])->render();
@@ -294,87 +290,13 @@ class Index extends Common
 		return $this->fetch('videolist',['title'=>$tag?$tag:"videolist"]);
     }
 
-    public function play(){
+    //公告阅读
+    public function readnotice(){
     	$id = input('id');
-    	$video = Db::name('video')->where(array('id'=>$id))->find();
-        $video['url'] = $this->MakeUrl($video['key'],60*10);
-        $video['cover'] = $this->thumb($video['key']);
-        $video['detail'] = $this->detail($video['key']);
-
-
-        $tags = Db::name('video_tag')->where(array('videoid'=>$id))->select();
-        $tagarr = array_column($tags, 'tagid');
-        // 启动事务
-        Db::startTrans();
-        try{
-            //update video views
-            Db::name('video')->where(array('id'=>$id))->setInc('views',1);
-            Db::name('tag')->where(array('id'=>['in',$tagarr]))->setInc('see',1);
-            // 提交事务
-            Db::commit();    
-        } catch (\Exception $e) {
-            // 回滚事务
-            Db::rollback();
-        }
-    	$tagvideo = Db::name('tag')->where(array('id'=>['in',array_column($tags, 'tagid')]))->select();
-    	$this->assign('tags',$tagvideo);
-    	$this->assign('video',$video);
-
-        $videoarr = Db::name('video_tag')->where(['tagid'=>['in',$tagarr]])->select();
-        $relation = Db::name("video")->where(['status'=>1,'id'=>['in',array_column($videoarr, 'videoid')]])->select();
-        foreach ($relation as $key => $value) {
-            $relation[$key]['cover'] = $this->thumb($value['key']);
-        }
-        $this->assign('list',$relation);
-        $this->assign('title',$video['title']);
-    	return $this->fetch('play');
+    	$notice = Db::query("select * from notice where id=$id")[0];
+    	return $this->fetch('readnotice',['notice'=>$notice]);
     }
 
-
-    private function MakeUrl($key,$time){
-        $accessKey ="mjX2MSYCMedaxEWcbwLeroF3PxTtw6TAz-KEtgd";
-        $secretKey = "6_z9j-xvludVNPrfMtlEv2YsRrOtnWe8m9TKxsu1";
-        // 构建Auth对象
-        $auth = new Auth($accessKey, $secretKey);
-        // 私有空间中的外链 http://<domain>/<file_key>
-        $baseUrl = 'http://p0ffo13yi.bkt.clouddn.com/'.$key;
-        // 对链接进行签名
-        $signedUrl = $auth->privateDownloadUrl($baseUrl,$time);
-        return $signedUrl;
-    }
-
-    private function thumb($key){
-        $accessKey ="mjX2MSYCMedaxEWcbawLeroF3PxTtw6TAz-KEtgd";
-        $secretKey = "6_z9j-xvludVNPrfMtlEv2YsRrOtnWe8m9TKxsu1";
-        // 构建Auth对象
-        $auth = new Auth($accessKey, $secretKey);
-        // 私有空间中的外链 http://<domain>/<file_key>
-        $baseUrl = 'http://p0ffo13yi.bkt.clouddn.com/'.$key."?vframe/png/offset/35/w/700/h/480";
-        // 对链接进行签名
-        $signedUrl = $auth->privateDownloadUrl($baseUrl);
-        return $signedUrl;
-
-    }
-
-
-    private function detail($key){
-        $accessKey ="mjX2MSYCMedaxEWcbawLeroF3PxTtw6TAz-KEtgd";
-        $secretKey = "6_z9j-xvludVNPrfMtlEv2YsRrOtnWe8m9TKxsu1";
-        // 构建Auth对象
-        $auth = new Auth($accessKey, $secretKey);
-        // 私有空间中的外链 http://<domain>/<file_key>
-        $baseUrl = 'http://p0ffo13yi.bkt.clouddn.com/'.$key."?avinfo";
-        // 对链接进行签名
-        $signedUrl = $auth->privateDownloadUrl($baseUrl);
-        $detail = file_get_contents($signedUrl);
-        $res = json_decode($detail,true);
-        return $res['format'];
-
-    }
-
-    public function law(){
-        return $this->fetch('law',['title'=>'law']);
-    }
 
     public function sendm(){
         $body = "please click the link below to finish check"."\n"."http://www.liondog.cn";
@@ -382,36 +304,6 @@ class Index extends Common
     }
 
 
-
-    private function registerweb($nickname,$password,$mail){
-         $user = Db::name('users')->where(['name'=>$nickname])->find();
-         if($user) exit(json_encode(['error'=>'nickname exists']));
-         $user1 = Db::name('users')->where(['mail'=>$mail])->find();
-           if($user1) exit(json_encode(['error'=>'mail exists']));
-        $ret = Db::name('users')->insertGetId(['name'=>$nickname,'password'=>md5($password),'mail'=>$mail,'status'=>0,'logintime'=>time()]);
-        if($ret){
-            $link = "http://www.liondog.cn/index/index/verify?id=".$ret."&mail=".$mail;
-            $body = "welcome to register swvideo and we hope our site may make you feel fine."."\n"."please click the link below to finish checking"."<br>"."<a href='{$link}'>".$link."</a>";
-            $this->sendmail($mail,"Check account for SWvideo",$body);
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-
-    public function verify(){
-        $id = input('id');
-        $mail = input('mail');
-        $user = Db::name('users')->where(['id'=>$id,'mail'=>$mail])->find();
-        if($user){
-            Db::name('users')->where(['id'=>$id])->setField('status',1);
-            exit("U check ur account successfully!!!NOw to login!");
-        }else{
-            exit("user does not exists");
-        }
-
-    }
 
 
 

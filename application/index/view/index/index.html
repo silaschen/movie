@@ -1,6 +1,10 @@
 {extend name='index:base'} 
 {block name='main'}   
-
+<style type="text/css">
+	.list-group-item{
+		padding:20px 15px;
+	}
+</style>
 
 	<div class="main-banner">
 		 <div class="banner col-md-8">
@@ -42,7 +46,7 @@
 
 		 			<div class="list-group">
 						{foreach name='notice' item='noti'}
-					  <a href="#" class="list-group-item list-group-item-info">{$noti.title}</a>
+					  <a href="{:url('index/index/readnotice',array('id'=>$noti['id']))}" class="list-group-item list-group-item-info">{$noti.title}</a>
 					{/foreach}
 					</div>
 
