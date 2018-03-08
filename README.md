@@ -4,6 +4,6 @@
 佳佳影视是一个类似于豆瓣的影视平台，提供了在线视频，在线购票，影视博客，评论，用户登录、注册，平台公告等功能。平台采用响应布局，适配多个终端。
 采用的技术:
 	服务端：服务端采用apache+php+mysql搭建，部分功能融入redis存储，比如在线人数，博客排行等。
-	前端：html,css,jquery,bootstrap。
+	前端：html,css,jquery,bootstrap,ajax异步加载。
 
 
