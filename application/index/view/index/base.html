@@ -98,7 +98,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             <button class="btn btn-primary"  data-toggle="modal">{$Think.session.login_nick}</button>
              <button class="btn btn-primary" onclick="location.href='{:url('index/index/myticket')}'">我的购票</button>
-            <button class="btn btn-primary" onclick="alert('开发中...')"  data-toggle="modal">登出</button>
+            <button class="btn btn-primary" onclick="logout()"  data-toggle="modal">登出</button>
 
 
     {else}
@@ -235,20 +235,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <script>
+  //{$webserver} 服务器域名
 function register(){
 	$.post("{$webserver}Index/index/register",$("#registerform").serialize(),function(data){
 		
-	if(data.code === 1)
+
+	if(data.code === 1){
 
 		alert("register success");
-	}
+	}else if(data.code === -10){
+        alert(data.msg);
+    }
+}
 ,'JSON');	
 }
 
 
 function login(){
 
-	var mail = $("input[name='loginemail']").val();
+	var mail = $("input[name='loginemail']").val();//获取表单值
 	var password = $("input[name='loginpassword']").val();
 	if(mail===null || password === null){
 		alert('请填写邮箱及密码');
@@ -262,12 +267,26 @@ function login(){
 				$("#loginbtn").html(data.nickname);
 				alert('登陆成功');
 			}else{
-				alert('密码错误');
+				alert('邮箱或密码错误');
             }
 
         }
 		
     ,'JSON');
+}
+
+function logout(){
+
+    $.post("{$webserver}Index/index/logout",function(ret){
+
+        if(ret.code===1){
+            location.reload();
+        }else{
+            alert('未知的错误....');
+        }
+
+
+    },'JSON');
 
 
 }

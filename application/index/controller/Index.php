@@ -7,69 +7,79 @@ use app\index\controller\Common;
 
 class Index extends Common
 {
-	public function playonline(){
-		$id = input('id');
-		$video = Db::name('video')->where(['id'=>$id])->find();
-			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/"); $this->assign('video',$video);
-		$this->UpdateVideoView($id);
-		$recommend = Db::query("select id,title from video where cate=2 and id not in ($id) order by view desc limit 8");
-		return $this->fetch('playonline',['recommend'=>$recommend]);
-	}
-
-
+	/**
+	*主页
+	*主要是去数据库请求各个模块数据
+	*Db::query()  数据库查询sql执行
+	*/
     public function index(){
     	//首页大图轮播
-		$slides = Db::name('slides')->select();
-		$this->assign('slides',$slides);
+		$slides = Db::query('select * from slides order by id desc');//查询轮播图
+		$this->assign('slides',$slides);//传递轮播图信息
 
 		//首页公告
-
-		$notice = Db::query("select * from notice order by id desc limit 6");
+		$notice = Db::query("select * from notice order by id desc limit 6");//选取最新6条公告信息
 		$this->assign('notice',$notice);
-		var_dump($notice);
-
-		//轮播电影
-		$movie = Db::name('video')->where(['cate'=>1])->select();
+	
+		//轮播购票
+		$movie = Db::query("select * from video where cate=1");
 		$this->assign('slidetwo',$movie);
 
-
 		//正在热映，本周，即将热映
-		$weekfinal = strtotime(date('Y-m-d', (time() + (7 - (date('w') == 0 ? 7 : date('w'))) * 24 * 3600+86400)));
-		$day = strtotime(date('Y-m-d',time()));
-		$time = $day+86400;
+		$weekfinal = strtotime(date('Y-m-d', (time() + (7 - (date('w') == 0 ? 7 : date('w'))) * 24 * 3600+86400)));//本周末24:00时间戳
+
+		$daystart = strtotime(date('Y-m-d',time()));//今天的0:00时间戳
+		$dayover = $day+86400;//今天24:00时间戳
 		$now=$week=$will = array();
 		foreach($movie as $k=>$v){
-			if($v['publishtime'] <$time && $v['publishtime']>= $day){
+			if($v['publishtime'] <$dayover && $v['publishtime']>= $day){
 				$v['publishtime'] = date('Y-m-d',$v['publishtime']);
-				$now[] = $v;
+				$now[] = $v;//今日正在放映
 
-			}else if($v['publishtime'] >= $time && $v['publishtime'] < $weekfinal){
+			}else if($v['publishtime'] >= $dayover && $v['publishtime'] < $weekfinal){
 					$v['publishtime'] = date('Y-m-d',$v['publishtime']);
-					 $week[] = $v;
+					 $week[] = $v;//本周放映
 
 			}else if($v['publishtime']>=$weekfinal){
 					$v['publishtime'] = date('Y-m-d',$v['publishtime']);
-					 $will[] = $v;
+					 $will[] = $v;//即将放映
 			}
 
 		}
 
 		//博客
 		$redis = \redisObj\redisTool::getRedis();
-	
+		
 		if($redis->get('blogindex')){
 
 			$blog = json_decode($redis->get('blogindex'),true);
 		}else{
 
-			$blog = Db::query("select * from blog order by addtime desc limit 3");
+			$blog = Db::query("select * from blog order by addtime desc limit 5");
 			$redis->setkey('blogindex',3600*24,json_encode($blog));
 		}
 
-		
+
+
+		$daystart = strtotime(date("Y-m-d",time()));
+		$dayover = $daystart+24*3600;
+		for ($i=0; $i < count($blog); $i++) {
+			$countsql = "select count(*) as total from likes where blogid={$blog[$i]['id']}"; 
+			$blog[$i]['likecount'] = Db::query($countsql)[0]['total'];
+
+			$existsql =    sprintf("select * from likes where userid=%d and blogid=%d and addtime between %d and %d" ,\think\Session::get('login_uid'),$blog[$i]['id'],$daystart,$dayover);
+			$existstatus=Db::query($existsql);
+
+			$blog[$i]['likestatus'] = $existstatus?1:0;
+
+		}
+
+
+
+		$this->assign('blog',$blog);
 		//在线视频
 		$online = Db::name('video')->where(['cate'=>2])->select();
-		$this->assign(['now'=>$now,'week'=>$week,'will'=>$will,'day'=>$day,'blog'=>$blog,'online'=>$online]);	
+		$this->assign(['now'=>$now,'week'=>$week,'will'=>$will,'day'=>$day,'online'=>$online]);	
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 		//top moview
 		$top_total = Db::query("select sum(view) as total from video where cate=1");
@@ -80,13 +90,21 @@ class Index extends Common
     }
 	
 
-
-    //注册
+    //注册,exit,josn_encode($param)
 	public function register(){
-			$data = \think\Request::instance()->post();
+			$data = \think\Request::instance()->post();//获取前端传过来的的值，数组
 			$data['password'] = md5($data['password']);
-			$data['addtime'] = time();
-			$db = Db::name('user')->insert($data);
+			$findsql = "SELECT * from user where nickname='{$data['nickname']}'";
+			//Db::query($sql)  执行sql语句
+			$status = Db::query($findsql);
+			if($status){
+				exit(json_encode(array('code'=>-10,'msg'=>'此昵称已被注册')));
+			}
+
+			//插入sql
+			$addsql=sprintf("insert into user VALUES ('','%s','%s','%s','%s','%s','%s')",$data['nickname'],$data['email'],$data['phone'],$data['password'],$data['sex'],time());
+			//执行插入sql语句
+			$db = Db::execute($addsql);
 			if($db){
 				exit(json_encode(['code'=>1]));
 			}else{
@@ -96,9 +114,9 @@ class Index extends Common
 	}
 
 
-	//login
+	//登录函数，session
 	public function login(){
-		$email =\think\Request::instance()->post('email');
+		$email = \think\Request::instance()->post('email');
 		$password =\think\Request::instance()->post('password');
 		$pwd = md5($password);
 		$user = Db::query("select * from user where email='$email' AND password='$pwd'");
@@ -114,7 +132,7 @@ class Index extends Common
 
 	//设置状态
 	public function SetUserLogin($user){
-		
+	
 		\think\Session::set('login_uid',$user[0]['id']);
 		\think\Session::set('login_nick',$user[0]['nickname']);
 	//	\redisObj\redisTool::getRedis()->lpush('loginuser',$user['id']);
@@ -133,7 +151,8 @@ class Index extends Common
 		foreach($res as $k=>$v){
 			$res[$k]['time']= json_decode($v['time']);
 		}
-			$this->UpdateVideoView($id); $this->assign('moviedates',$res);
+		$this->UpdateVideoView($id);
+		$this->assign('moviedates',$res);
 		$this->assign('film',$film);
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 		return $this->fetch('selectshow');
@@ -294,8 +313,19 @@ class Index extends Common
     public function readnotice(){
     	$id = input('id');
     	$notice = Db::query("select * from notice where id=$id")[0];
-    	return $this->fetch('readnotice',['notice'=>$notice]);
+    	$this->assign('notice',$notice);
+    	return $this->fetch('readnotice');
     }
+
+
+    public function playonline(){
+		$id = input('id');
+		$video = Db::name('video')->where(['id'=>$id])->find();
+			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/"); $this->assign('video',$video);
+		$this->UpdateVideoView($id);
+		$recommend = Db::query("select id,title from video where cate=2 and id not in ($id) order by view desc limit 8");
+		return $this->fetch('playonline',['recommend'=>$recommend]);
+	}
 
 
     public function sendm(){
@@ -304,8 +334,43 @@ class Index extends Common
     }
 
 
+/*
+******************************************************************************************************************************************************************************************************************************************************************************************/
+	public function like(){
+		//strtotime() y-m-d 时间格式转化成时间戳
+		$blogid = input('blogid');
+		$daystart = strtotime(date("Y-m-d",time()));
+		$dayover = $daystart+24*3600;
+
+		$existsql=sprintf("select * from likes where userid=%d and blogid=%d and addtime between %d and %d" ,\think\Session::get('login_uid'),$blogid,$daystart,$dayover);
+		$existstatus=Db::query($existsql);
+		if($existstatus){
+			exit(json_encode(array('code'=>-1)));
+		}
+		$sql = sprintf("INSERT INTO likes(blogid,userid,addtime) VALUES (%d,%d,%d)",$blogid,\think\Session::get('login_uid'),time());
+		$status=Db::execute($sql);
+		if ($status) {
+			$sq = "select count(*) as total from likes where blogid=$blogid";
+			$huizhi2=Db::query($sq);
+
+			exit(json_encode(array('code'=>1,'likecount'=>$huizhi2[0]['total'])));
+
+		}else{
+			exit(json_encode(['code'=>0]));
+		}
+
+	}
 
 
+	//登出
+	public function logout(){
+
+		\think\Session::set('login_uid',null);
+		\think\Session::set('login_nick',null);
+		exit(json_encode(array('code'=>1)));
+
+
+	}
 
 
 }

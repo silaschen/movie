@@ -274,10 +274,22 @@
 				<div class="our-blog">
 					<h5>影视博客</h5>
 					{foreach name='blog' item='new'}
+
 					<div class="post-article">
 						<a href="{:url('index/index/readblog',array('id'=>$new['id']))}" class="post-title">{$new.title}</a>
-						<i>Posted on {$new.addtime|date="M d,Y",###}</i>
+
+						{if condition="$new.likestatus eq 0"}
+						<span onclick="likeclick({$new.id},this)"  class="fa fa-thumbs-o-up" style="cursor: pointer;">{$new.likecount}</span>
+
+						{else}
+
+						<span onclick="likeclick({$new.id},this)"  class="fa fa-thumbs-up" style="cursor: pointer;">{$new.likecount}</span>
+
+						{/if}
+						&nbsp
+						<i style="color:blueviolet">Posted on {$new.addtime|date="M d,Y",###}</i>
 						<p>{$new.description}<br> <a href="{:url('index/index/readblog',array('id'=>$new['id']))}">Read more</a></p>
+
 					</div>
 
 					{/foreach}
@@ -299,7 +311,27 @@
         	    	 $('#loginmodal').modal('show');
 
         	    {/if}
-      
+      	
+
+
+      	function likeclick(blogid,obj){
+      		$.post("{$webserver}Index/index/like",{'blogid':blogid},function(huizhi){
+
+
+      				if(huizhi.code === 1){
+
+      					//点赞成功
+      					//把这条博客的点赞数更新
+      					$(obj).html(huizhi.likecount);
+      					$(obj).removeClass('fa-thumbs-o-up').addClass('fa-thumbs-up');
+
+      				}else if(huizhi.code==-1){
+      					//本人今天已经点赞
+      					alert("已点赞");
+      				}
+      			
+      		},'JSON')
+      	}
         
         </script>
 {/block}

@@ -41,20 +41,29 @@ class Admin extends Common
 		}
 	}
 	
-
 	public function userlist(){
 
-			$this->title = '用户列表';
 			$p = input('p')?input('p'):1;
 			$word = input('word');
 			$map = array();
 			if($word) $map['title'] = array('like','%'.$word.'%');
-			$list = Db::name('user')->where($map)->paginate(10);
+			$list = Db::name('user')->where($map)->paginate(10);//分页
 			$page = $list->render();
 			$this->assign('page',$page);// 赋值分页输出
 			//分页跳转的时候保证查询条件
 			$this->assign('list',$list);
 			return $this->fetch('userlist',['title'=>'用户列表','eq'=>'用户管理']);
+	}
+
+
+	public function deluser(){
+
+		$id = input('id');
+		$sql = "delete from user where id=$id";
+		Db::execute($sql);
+		exit(json_encode(['code'=>1]));
+
+
 	}
 	
 
@@ -403,6 +412,26 @@ class Admin extends Common
 			exit(json_encode(['code'=>0,'msg'=>'出票失败']));
 		}
 	}
+
+
+
+		public function likelist(){
+
+			$p = input('page')?input('page'):1;
+			$list = Db::name('likes')
+			->field("likes.id,user.nickname,blog.title,likes.addtime") 
+			->join('blog','blog.id=likes.blogid')
+			->join('user','user.id=likes.userid')
+			->paginate(10);//分页
+
+			$page = $list->render();
+			$this->assign('page',$page);// 赋值分页输出
+			//分页跳转的时候保证查询条件
+			$this->assign('list',$list);
+			return $this->fetch('likelist',['title'=>'点赞列表','eq'=>'点赞记录']);
+	}
+
+
 
 
 
