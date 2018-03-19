@@ -5,5 +5,5 @@
 采用的技术:
 	服务端：服务端采用apache+php+mysql搭建，部分功能融入redis存储，比如在线人数，博客排行等。
 	前端：html,css,jquery,bootstrap,ajax异步加载。
-
+小佳佳
 
