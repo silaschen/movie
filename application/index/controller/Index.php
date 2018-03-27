@@ -13,6 +13,8 @@ class Index extends Common
 	*Db::query()  数据库查询sql执行
 	*/
     public function index(){
+    	//导航推荐,及在线影视推荐
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
     	//首页大图轮播
 		$slides = Db::query('select * from slides order by id desc');//查询轮播图
 		$this->assign('slides',$slides);//传递轮播图信息
@@ -144,6 +146,9 @@ class Index extends Common
 	 *购票详情页
 	*/
 	public function selectshow(){
+		//导航推荐,及在线影视推荐
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
+
 		$id = input('id');
 		$film = Db::query("select * from video where id='$id'");
 		$sql = "select b.id, b.time,b.cinemaid,b.btime,b.etime,c.name,c.address from  tickets b  JOIN cinemas c ON b.cinemaid=c.id where b.videoid='$id'";
@@ -160,6 +165,9 @@ class Index extends Common
 	
 	//下单页
 	public function payment(){
+		//导航推荐,及在线影视推荐
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
+
 		if(Request::instance()->isGet()){
 			$vid = input('vid');
 			$cid = input('cid');
@@ -195,6 +203,7 @@ class Index extends Common
 
 	//下单
 	public function orderfilm(){
+
 		if(!$this->LoginStstus()){
 			exit(json_encode(['code'=>0,'msg'=>'未登录，请先登录再购票']));
 		}
@@ -214,10 +223,15 @@ class Index extends Common
 
 	//blog
 	public function blog(){
-		$blogs = Db::query("select * from blog order by addtime desc");
-		$this->assign('blogs',$blogs);
+		//导航推荐,及在线影视推荐
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
+
+
+		$blog = Db::name('blog')->order('id desc')->paginate(6);
+		$page = $blog->render();
+		$hot = Db::query("select id,title from blog order by id asc limit 10");
 		$this->assign('webserver',\think\Config::get('WEBSERVER')."/");
-		return $this->fetch('blog');
+		return $this->fetch('blog',['blog'=>$blog,'page'=>$page,'hot'=>$hot]);
 	}
 
 	//movies
@@ -228,6 +242,9 @@ class Index extends Common
 
 	//读博客
 	public function readblog(){
+		//导航推荐,及在线影视推荐
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
+
 		$id = input('id');
 		$blog = Db::name('blog')->where(array('id'=>$id))->find();
 		$this->assign('blog',$blog);
@@ -256,6 +273,9 @@ class Index extends Common
 
 
 	public function myticket(){
+		//导航推荐,及在线影视推荐
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
+
 		$sql = sprintf("select o.id,o.orderid,o.addtime,o.status,v.title,c.name,o.time,o.money,t.btime,t.etime from film_order o join video v ON o.videoid=v.id join cinemas c ON o.cinemaid=c.id join tickets t ON o.ticketid=t.id where o.uid=%d",\think\Session::get('login_uid'));
 		$ticket = Db::query($sql);
 		return $this->fetch('myticket',['ticket'=>$ticket]);
@@ -269,48 +289,33 @@ class Index extends Common
 			Db::execute($sql);
 	}
 	      
-    /**
-     * taglist
-     */
-    public function taglist(){
-    	$this->title= "tag list";
-    	$list = Db::name('tag')->order('see desc,count desc')->select();
-    	$style = [
-    	"color:red;","color:pink","color:yellow;","color:green","color:blue","color:purple","color:#454545"
-    	];
-    	$this->assign('style',$style);
-    	$this->assign('list',$list);
-    	return $this->fetch('taglist',['title'=>'Tags']);
-    }
 
     /**
      * video list
      */
     public function videolist(){
+    	//导航推荐,及在线影视推荐
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
+
     	$p = input('p') ? input('p'):1;
-    	$tag = input('tag');
-		if($tag){
-			$tagid = Db::name('tag')->where(['tag'=>$tag])->value('id');
-			$videoid = Db::name('video_tag')->where(['tagid'=>$tagid])->select();
-			$video = array_column($videoid, 'videoid');
-			$map['id'] = array('in',$video);
-		}   
-		$map['status'] = 1;
+	  	$map['cate'] = 2;
 		$model = Db::name('video');
 		$list = $model
 		->where($map)->paginate(6,false,['query' => request()->param()])->toArray();
 		// 获取分页显示
 		$page = $model
         ->where($map)->paginate(6,false,['query' => request()->param()])->render();
-
 		// 模板变量赋值
 		$this->assign('list', $list);
 		$this->assign('page', $page);
-		return $this->fetch('videolist',['title'=>$tag?$tag:"videolist"]);
+		return $this->fetch('videolist',['title'=>"videolist"]);
     }
 
     //公告阅读
     public function readnotice(){
+    	//导航推荐,及在线影视推荐
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
+
     	$id = input('id');
     	$notice = Db::query("select * from notice where id=$id")[0];
     	$this->assign('notice',$notice);
@@ -319,6 +324,9 @@ class Index extends Common
 
 
     public function playonline(){
+    	//导航推荐,及在线影视推荐
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
+    	
 		$id = input('id');
 		$video = Db::name('video')->where(['id'=>$id])->find();
 			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/"); $this->assign('video',$video);
@@ -333,6 +341,14 @@ class Index extends Common
         var_dump($this->sendmail('chensiwei1@outlook.com','CHECK account',$body));
     }
 
+
+    //导航栏在线否票，在线影院
+    private  function navdata(){
+    	$navbuy = Db::query("select * from video where cate=1 order by id desc limit 4");
+    	$this->assign('navbuy',$navbuy);
+    	$navonline = Db::query("select * from video where cate=2 order by id desc limit 4");
+    	$this->assign('navonline',$navonline);
+    }
 
 /*
 ******************************************************************************************************************************************************************************************************************************************************************************************/
