@@ -40,7 +40,7 @@
           <tr>
             <td>{$vo.id}</td><td>{$vo.title}</td><td><if condition="$vo.cover neq ''"><a href="{$vo.cover}" target='_blank'><i class='fa fa-photo'></i></a></if></td><td>{if condition="$vo.cate eq '1'"}影院{else/}在线{/if}</td>
             <td>{$vo.price}</td><td>{$vo.view}</td>
-          
+
             <td>
               <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
@@ -49,8 +49,8 @@
                   <span class="sr-only">+</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="{:url('Sys/addvideo',array('id'=>$vo['id']))}">编辑</a></li>
-           
+                  <li><a href="{:url('admin/addvideo',array('id'=>$vo['id']))}">编辑</a></li>
+
                   <li class="divider"></li>
                   <li><a href="javascript:setstat({$vo.id},-1);">删除</a></li>
                 </ul>
@@ -60,11 +60,11 @@
           {/volist}
         </tbody>
       </table>
-       
+
     </div><!-- /.box-body -->
     <div class="box-footer clearfix">
 	    <ul class="pagination pagination-sm no-margin pull-right">{$page}</ul>
-	  </div>    
+	  </div>
   </div>
 <script type="text/javascript">
 function setstat(id,t){
