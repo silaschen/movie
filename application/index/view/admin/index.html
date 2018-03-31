@@ -5,9 +5,19 @@
 
 <!-- 曲线图 -->
 <div class="box box-solid">
+
+
 <div class="box-body">
 	<div id="main" style="min-width: 310px; height: 250px; margin: 0 auto"></div>
+
+  <div id='view' style="min-width:310px;height:250px;margin:0 auto;">
+
+  </div>
 </div>
+
+
+
+
 </div>
 
 
@@ -54,6 +64,22 @@ option = {
         }
     ]
 };
-myChart.setOption(option)
+myChart.setOption(option);
+var view=myChart = echarts.init(document.getElementById('view'));
+option2 = {
+    xAxis: {
+        type: 'category',
+        data: {$day}
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        name:'view source',
+        data: [200, 50, 23, 190, 350, 567, 124,700,800],
+        type: 'line'
+    }]
+};
+view.setOption(option2);
 </script>
 {/block}
