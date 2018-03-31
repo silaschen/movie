@@ -22,7 +22,7 @@ class Index extends Common
 		//首页公告
 		$notice = Db::query("select * from notice order by id desc limit 6");//选取最新6条公告信息
 		$this->assign('notice',$notice);
-	
+
 		//轮播购票
 		$movie = Db::query("select * from video where cate=1");
 		$this->assign('slidetwo',$movie);
@@ -51,7 +51,7 @@ class Index extends Common
 
 		//博客
 		$redis = \redisObj\redisTool::getRedis();
-		
+
 		if($redis->get('blogindex')){
 
 			$blog = json_decode($redis->get('blogindex'),true);
@@ -66,7 +66,7 @@ class Index extends Common
 		$daystart = strtotime(date("Y-m-d",time()));
 		$dayover = $daystart+24*3600;
 		for ($i=0; $i < count($blog); $i++) {
-			$countsql = "select count(*) as total from likes where blogid={$blog[$i]['id']}"; 
+			$countsql = "select count(*) as total from likes where blogid={$blog[$i]['id']}";
 			$blog[$i]['likecount'] = Db::query($countsql)[0]['total'];
 
 			$existsql =    sprintf("select * from likes where userid=%d and blogid=%d and addtime between %d and %d" ,\think\Session::get('login_uid'),$blog[$i]['id'],$daystart,$dayover);
@@ -81,7 +81,7 @@ class Index extends Common
 		$this->assign('blog',$blog);
 		//在线视频
 		$online = Db::name('video')->where(['cate'=>2])->select();
-		$this->assign(['now'=>$now,'week'=>$week,'will'=>$will,'day'=>$day,'online'=>$online]);	
+		$this->assign(['now'=>$now,'week'=>$week,'will'=>$will,'day'=>$day,'online'=>$online]);
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 		//top moview
 		$top_total = Db::query("select sum(view) as total from video where cate=1");
@@ -90,7 +90,7 @@ class Index extends Common
 
 		return $this->fetch('index');
     }
-	
+
 
     //注册,exit,josn_encode($param)
 	public function register(){
@@ -104,7 +104,7 @@ class Index extends Common
 			}
 
 			//插入sql
-			$addsql=sprintf("insert into user VALUES ('','%s','%s','%s','%s','%s','%s')",$data['nickname'],$data['email'],$data['phone'],$data['password'],$data['sex'],time());
+			$addsql=sprintf("insert into user(nickname,email,phone,password,sex,addtime) VALUES ('%s','%s','%s','%s','%s','%s')",$data['nickname'],$data['email'],$data['phone'],$data['password'],$data['sex'],time());
 			//执行插入sql语句
 			$db = Db::execute($addsql);
 			if($db){
@@ -112,7 +112,7 @@ class Index extends Common
 			}else{
 				exit(json_encode(['code'=>0]));
 			}
-		
+
 	}
 
 
@@ -130,11 +130,11 @@ class Index extends Common
 			exit(json_encode(['code'=>0]));
 		}
 	}
-	
+
 
 	//设置状态
 	public function SetUserLogin($user){
-	
+
 		\think\Session::set('login_uid',$user[0]['id']);
 		\think\Session::set('login_nick',$user[0]['nickname']);
 	//	\redisObj\redisTool::getRedis()->lpush('loginuser',$user['id']);
@@ -162,7 +162,7 @@ class Index extends Common
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 		return $this->fetch('selectshow');
 	}
-	
+
 	//下单页
 	public function payment(){
 		//导航推荐,及在线影视推荐
@@ -182,7 +182,7 @@ class Index extends Common
 		}else{
 			$data = Request::instance()->post();
 			var_dump($data);
-		
+
 
 		}
 
@@ -238,7 +238,7 @@ class Index extends Common
 	public function movies(){
 		return $this->fetch('movies');
 	}
-	
+
 
 	//读博客
 	public function readblog(){
@@ -256,7 +256,7 @@ class Index extends Common
 		$latest = Db::query("select id,title from blog order by addtime desc limit 15");
 		$this->assign('latest',$latest);
 		return $this->fetch('single');
-	}	
+	}
 
 
 
@@ -279,7 +279,7 @@ class Index extends Common
 		$sql = sprintf("select o.id,o.orderid,o.addtime,o.status,v.title,c.name,o.time,o.money,t.btime,t.etime from film_order o join video v ON o.videoid=v.id join cinemas c ON o.cinemaid=c.id join tickets t ON o.ticketid=t.id where o.uid=%d",\think\Session::get('login_uid'));
 		$ticket = Db::query($sql);
 		return $this->fetch('myticket',['ticket'=>$ticket]);
-	} 
+	}
 
 
 	public function UpdateVideoView($id){
@@ -288,7 +288,7 @@ class Index extends Common
 			$sql = sprintf("update video set view='%d' where id='%d'",$old+1,$id);
 			Db::execute($sql);
 	}
-	      
+
 
     /**
      * video list
@@ -326,7 +326,7 @@ class Index extends Common
     public function playonline(){
     	//导航推荐,及在线影视推荐
     	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
-    	
+
 		$id = input('id');
 		$video = Db::name('video')->where(['id'=>$id])->find();
 			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/"); $this->assign('video',$video);
