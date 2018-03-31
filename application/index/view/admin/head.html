@@ -6,7 +6,7 @@
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><i class='fa fa-television'></i></span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><i class='fa fa-television'></i>佳佳全球视频</span>
+    <span class="logo-lg"><i class='fa fa-television'></i>{$Think.Config.APPNAME}</span>
   </a>
   <!-- Header Navbar -->
   <nav class="navbar navbar-static-top" role="navigation">
@@ -29,20 +29,18 @@
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
             <li class="user-header">
-              <img src="public/static/res/admin.png" class="img-circle" alt="User Image">
+              <img src="{$Think.Config.WEBSERVER}/public/static/res/admin.png" class="img-circle" alt="User Image">
               <p>
-                asd
-                <small>上次登录：wqewq</small>
               </p>
             </li>
-      
+
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
                 <a href="" class="btn btn-default btn-flat">修改密码</a>
               </div>
               <div class="pull-right">
-                <a href="" onclick="return confirm('确定退出登录？');" class="btn btn-default btn-flat">退出系统</a>
+                <a href="javascript:logout()" class="btn btn-default btn-flat">退出系统</a>
               </div>
             </li>
           </ul>
@@ -51,3 +49,28 @@
     </div>
   </nav>
 </header>
+
+<script type="text/javascript">
+function logout(){
+  var type = "{$Think.Session.login_cinema_status}";
+
+  if(type === '1'){
+    // console.log(type);
+    type = 1;
+  }else{
+    type=2;
+  }
+
+
+  $.post("{:url('index/admin/logout')}",{'type':type},function(ret){
+
+      if(ret.code===1){
+        location.href = ret.gourl;
+      }
+
+
+  },'JSON');
+
+
+}
+</script>

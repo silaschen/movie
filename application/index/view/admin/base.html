@@ -5,16 +5,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>{$title}</title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link rel="stylesheet" href="/public/static/com/AdminLTE/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="{$Think.Config.WEBSERVER}/public/static/com/AdminLTE/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
-<link rel="stylesheet" href="/public/static/com/AdminLTE/css/AdminLTE.css">
-<link rel="stylesheet" href="/public/static/com/AdminLTE/css/skins/skin-red.css">
+<link rel="stylesheet" href="{$Think.Config.WEBSERVER}/public/static/com/AdminLTE/css/AdminLTE.css">
+<link rel="stylesheet" href="{$Think.Config.WEBSERVER}/public/static/com/AdminLTE/css/skins/skin-red.css">
 <!-- jQuery 2.1.4 -->
-<script src="/public/film/js/jquery.min.js"></script>
+<script src="{$Think.Config.WEBSERVER}/public/film/js/jquery-3.0.0.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
-<script src="/public/static/com/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
-<script src="/public/static/com/common.js"></script>
+<script src="{$Think.Config.WEBSERVER}/public/static/com/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
+<script src="{$Think.Config.WEBSERVER}/public/static/com/common.js"></script>
+<script src="{$Think.Config.WEBSERVER}/public/film/js/echarts.js"></script>
 <style type="text/css">
 /*loading*/
 #mask{position: fixed;z-index: 999999;top: 0;bottom: 0;left: 0;right: 0;display: none;}
@@ -29,9 +30,9 @@
 <div class="wrapper">
   {block name="head"}{include file="admin:head" /}{/block}
   <!-- Left side column. contains the logo and sidebar -->
-  {if condition="$Think.session.login_cinema_status neq 1"}
+
   {block name="left"}{include file="admin:left" /}{/block}
-  {/if}
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -44,13 +45,13 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
-    <div class="pull-right hidden-xs">值得信赖的移动互联网开发服务商!</div>
+    <div class="pull-right hidden-xs"></div>
     <!-- Default to the left -->
     <a  target='_blank'>&copy; </a>
   </footer>
 </div><!-- ./wrapper -->
 <!-- AdminLTE App -->
-<script src="/public/static/com/AdminLTE/js/app.min.js"></script>
+<script src="{$Think.Config.WEBSERVER}/public/static/com/AdminLTE/js/app.min.js"></script>
 <div id="mask"><div class='loading'></div></div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace app\index\controller;
 use app\index\controller\Common;
 use think\Request;
@@ -8,20 +8,42 @@ use think\Db;
 */
 class Admin extends Common
 {
+
+	//判断是否登陆
+	protected function IsAdmin(){
+			if(!\think\Session::get('sys_uid')){
+				$this->redirect("index/admin/login");
+			}
+	}
+function kill(){
+	session('cinema_login','');
+	session('login_cinema_status','');
+}
+
 	#logout#
 	public function logout(){
-		session('sys_uid',null);
-		session('sys_user',null);
-		session('sys_role',null);
-		$this->redirect('admin/login');
-		exit();
+		$type = input('type')?input('type'):2;
+		if($type == 2){
+
+			session('sys_uid',null);
+
+			exit(json_encode(['code'=>1,'gourl'=>url('index/admin/login')]));
+
+		}else{
+
+			session('login_cinema_status',null);
+			session('login_cinema',null);
+			exit(json_encode(['code'=>1,'gourl'=>url('index/admin/cinemalogin')]));
+
+		}
+
 	}
 
 	#登录#
 	public function login(){
 		if(Request::instance()->isGet()){
 			if(session('sys_uid')){
-				$this->redirect('Admin/index');exit();
+				$this->redirect('Admin/videolist');exit();
 			}
 
 			return $this->fetch('login',['title'=>'登录']);
@@ -34,15 +56,41 @@ class Admin extends Common
 			if(!$info) exit(json_encode(['code'=>0,'msg'=>'用户不存在']));
 			if($info['status']){
 					session('sys_uid',$info['id']);
+
 					exit(json_encode(['code'=>1,'msg'=>'successfully']));
 			}else{
 				exit(json_encode(['code'=>0]));
 			}
 		}
 	}
-	
-	public function userlist(){
 
+
+	public function index(){
+		$this->IsAdmin();
+		//9 day ago---now
+		$i = 8;
+		for ($i=8; $i >= 0; $i--) {
+			$day =  date("Y-m-d",strtotime('-'.$i." day"));
+			$days[] = $day;
+			$data[] = Db::query(sprintf("select count(*) as total FROM film_order where addtime between '%s' and '%s'",
+			strtotime($day),strtotime($day)+86400))[0]['total'];
+		}
+
+		$this->assign(['day'=>json_encode($days),'data'=>json_encode($data)]);
+		return $this->fetch('index');
+
+
+
+
+
+
+	}
+
+
+
+
+	public function userlist(){
+		$this->isAdmin();
 			$p = input('p')?input('p'):1;
 			$word = input('word');
 			$map = array();
@@ -57,7 +105,7 @@ class Admin extends Common
 
 
 	public function deluser(){
-
+		$this->isAdmin();
 		$id = input('id');
 		$sql = "delete from user where id=$id";
 		Db::execute($sql);
@@ -65,11 +113,12 @@ class Admin extends Common
 
 
 	}
-	
+
 
 	public function addslide(){
+		$this->isAdmin();
 		if(\think\Request::instance()->isGet()){
-				
+
 		return $this->fetch('addslide',['eq'=>1,'title'=>'slide']);
 
 
@@ -78,16 +127,17 @@ class Admin extends Common
 			$flag = Db::name('slides')->insert(['cover'=>$cover]);
 			exit(json_encode(['code'=>1]));
 		}
-	
+
 
 	}
 
 	//add cinemas
 	public function addcinema(){
+		$this->isAdmin();
 
 		if(Request::instance()->isGet()){
-			
-			return $this->fetch('addcinema',['eq'=>1,'title'=>'addcinema']);			
+
+			return $this->fetch('addcinema',['eq'=>1,'title'=>'addcinema']);
 
 		}else{
 			$data = Request::instance()->post();
@@ -107,6 +157,7 @@ class Admin extends Common
 
 	#addblog#
 	public function addblog(){
+		$this->isAdmin();
 		if(Request::instance()->isGet()){
 			$id = Request::instance()->param('id');
 			$info = Db::name('blog')->where(['id'=>$id])->find();
@@ -120,7 +171,7 @@ class Admin extends Common
 				$data['author'] = 'admin';
 				Db::name('blog')->insert($data);
 			}
-			
+
 			exit(json_encode(['code'=>1,'msg'=>'成功']));
 
 		}
@@ -128,6 +179,7 @@ class Admin extends Common
 
 	#文章列表#
 	public function essaylist(){
+		$this->isAdmin();
 		if(Request::instance()->isGet()){
 
 			$list = Db::name('blog')->where(['status'=>['egt',0]])->paginate(10);
@@ -142,13 +194,13 @@ class Admin extends Common
 			$res = Db::name('blog')->where(['id'=>$id])->update(['status'=>$t]);
 			exit(json_encode(['code'=>1]));
 		}
-	
+
 	}
 
 
 
 	public function videolist(){
-		// $this->IsAdm();
+		$this->isAdmin();
 		if(\think\Request::instance()->isGet()){
 			$this->title = 'video列表';
 			$p = input('p')?input('p'):1;
@@ -168,9 +220,9 @@ class Admin extends Common
 		}
 	}
 
-	
+
 	public function addvideo(){
-		// $this->IsAdm(true);
+	$this->isAdmin();
 		if(\think\Request::instance()->isGet()){
 			$id = input('id');
 			$cinemas = Db::query('SELECT * from cinemas');
@@ -183,10 +235,10 @@ class Admin extends Common
 			$video['title'] = $data['title'];
 			$video['price'] = $data['price'];
 			$video['cover'] = $data['cover'];
-			$video['cate'] = $data['cate'];		
+			$video['cate'] = $data['cate'];
 			$video['publishtime'] = strtotime($data['publishtime']);
 			$video['director'] = $data['director'];
-				
+
 			$r = Db::name('video')->insertGetId($video);
 
 			if($r){
@@ -197,28 +249,28 @@ class Admin extends Common
 			}
 		}
 	}
-	
+
 
 	public function addonline(){
 
-	
+		$this->isAdmin();
 		if(\think\Request::instance()->isGet()){
 			return $this->fetch('addonline',['title'=>'add video','eq'=>1]);
 		}else{
 			$data = \think\Request::instance()->post();
-		
+
 			// 新增
 			$video['title'] = $data['title'];
 			$video['cate'] = $data['cate'];
 			$video['cover'] = $data['cover'];
-			
+
 			$video['publishtime'] = strtotime($data['publishtime']);
 			$video['director'] = $data['director'];
 			$video['address'] = $data['address'];
 			$r = Db::name('video')->insertGetId($video);
 
 			if($r){
-	
+
 				exit(json_encode(['code'=>1,'msg'=>'successfully upload']));
 			}else{
 				exit(json_encode(['code'=>0,'msg'=>'failed upload']));
@@ -231,6 +283,7 @@ class Admin extends Common
 
 
 	public function AddTicket($r,$cinemas){
+		$this->isAdmin();
 		if(!empty($cinemas)){
 			foreach($cinemas as $k=>$v){
 
@@ -250,10 +303,11 @@ class Admin extends Common
 	}
 
 
-	
+
 	public function addTag($video,$tagarr){
+		$this->isAdmin();
 		if(!$tagarr) return false;
-		for ($i=0; $i < count($tagarr); $i++) { 
+		for ($i=0; $i < count($tagarr); $i++) {
 				$tag = Db::name('tag')->where(['tag'=>$tagarr[$i]])->find();
 				if($tag){
 					Db::name('tag')->where(['tag'=>$tagarr[$i]])->setInc('count',1);
@@ -269,7 +323,7 @@ class Admin extends Common
 
 	//博客列表
 		public function bloglist(){
-		// $this->IsAdm();
+				$this->isAdmin();
 		if(\think\Request::instance()->isGet()){
 			$this->title = ' 博客列表';
 			$p = input('p')?input('p'):1;
@@ -292,6 +346,7 @@ class Admin extends Common
 
 	//添加公告编辑
 	public function addnotice(){
+		$this->isAdmin();
 		if($_SERVER['REQUEST_METHOD'] === 'GET'){
 			$id = input('id');
 			if($id){
@@ -322,7 +377,7 @@ class Admin extends Common
 
 		//公告列表
 	public function noticelist(){
-		// $this->IsAdm();
+	$this->isAdmin();
 		if(\think\Request::instance()->isGet()){
 			$this->title = '公告列表';
 			$p = input('p')?input('p'):1;
@@ -386,7 +441,7 @@ class Admin extends Common
 			$p = input('p')?input('p'):1;
 			$word = input('word');
 			$map = array();
-			// if($word) $map['v.title'] = array('like','%'.$word.'%');
+			if($word) $map['fo.orderid'] = array('like','%'.$word.'%');
 			$map['fo.cinemaid'] = \think\Session::get('login_cinema');
 			$list = Db::name('film_order')
 			->alias('fo')
@@ -416,10 +471,10 @@ class Admin extends Common
 
 
 		public function likelist(){
-
+			$this->isAdmin();
 			$p = input('page')?input('page'):1;
 			$list = Db::name('likes')
-			->field("likes.id,user.nickname,blog.title,likes.addtime") 
+			->field("likes.id,user.nickname,blog.title,likes.addtime")
 			->join('blog','blog.id=likes.blogid')
 			->join('user','user.id=likes.userid')
 			->paginate(10);//分页
