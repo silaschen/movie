@@ -26,15 +26,13 @@ class Index extends Common
 		//轮播购票
 		$movie = Db::query("select * from video where cate=1");
 		$this->assign('slidetwo',$movie);
-
 		//正在热映，本周，即将热映
 		$weekfinal = strtotime(date('Y-m-d', (time() + (7 - (date('w') == 0 ? 7 : date('w'))) * 24 * 3600+86400)));//本周末24:00时间戳
-
 		$daystart = strtotime(date('Y-m-d',time()));//今天的0:00时间戳
-		$dayover = $day+86400;//今天24:00时间戳
+		$dayover = $daystart+86400;//今天24:00时间戳
 		$now=$week=$will = array();
 		foreach($movie as $k=>$v){
-			if($v['publishtime'] <$dayover && $v['publishtime']>= $day){
+			if($v['publishtime'] <$dayover && $v['publishtime']>= $daystart){
 				$v['publishtime'] = date('Y-m-d',$v['publishtime']);
 				$now[] = $v;//今日正在放映
 
