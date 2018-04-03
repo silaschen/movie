@@ -78,12 +78,6 @@ function kill(){
 
 		$this->assign(['day'=>json_encode($days),'data'=>json_encode($data)]);
 		return $this->fetch('index');
-
-
-
-
-
-
 	}
 
 
@@ -94,7 +88,7 @@ function kill(){
 			$p = input('p')?input('p'):1;
 			$word = input('word');
 			$map = array();
-			if($word) $map['title'] = array('like','%'.$word.'%');
+			if($word) $map['nickname'] = array('like','%'.$word.'%');
 			$list = Db::name('user')->where($map)->paginate(10);//分页
 			$page = $list->render();
 			$this->assign('page',$page);// 赋值分页输出
@@ -109,7 +103,7 @@ function kill(){
 		$id = input('id');
 		$sql = "delete from user where id=$id";
 		Db::execute($sql);
-		exit(json_encode(['code'=>1]));
+		exit(json_encode(['code'=>1,'msg'=>'delete the user successfully']));
 
 
 	}
@@ -118,10 +112,7 @@ function kill(){
 	public function addslide(){
 		$this->isAdmin();
 		if(\think\Request::instance()->isGet()){
-
-		return $this->fetch('addslide',['eq'=>1,'title'=>'slide']);
-
-
+			return $this->fetch('addslide',['eq'=>1,'title'=>'slide']);
 		}else{
 			$cover = input('cover');
 			$flag = Db::name('slides')->insert(['cover'=>$cover]);
@@ -207,7 +198,7 @@ function kill(){
 			$word = input('word');
 			$map = array();
 			if($word) $map['title'] = array('like','%'.$word.'%');
-			$list = Db::name('video')->paginate(10);
+			$list = Db::name('video')->where($map)->paginate(10);
 			$page = $list->render();
 			$this->assign('page',$page);// 赋值分页输出
 			//分页跳转的时候保证查询条件
@@ -330,7 +321,7 @@ function kill(){
 			$word = input('word');
 			$map = array();
 			if($word) $map['title'] = array('like','%'.$word.'%');
-			$list = Db::name('blog')->paginate(10);
+			$list = Db::name('blog')->where($map)->paginate(10);
 			$page = $list->render();
 			$this->assign('page',$page);// 赋值分页输出
 			//分页跳转的时候保证查询条件
@@ -389,7 +380,7 @@ function kill(){
 			$this->assign('page',$page);// 赋值分页输出
 			//分页跳转的时候保证查询条件
 			$this->assign('list',$list);
-			return $this->fetch('noticelist',['title'=>'博客列表','eq'=>2]);
+			return $this->fetch('noticelist',['title'=>'公告列表','eq'=>'公告管理']);
 		}else{
 			$id = input('id');
 			Db::name('notice')->where(['id'=>$id])->delete();

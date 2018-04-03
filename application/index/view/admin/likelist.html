@@ -4,10 +4,10 @@
   <div class="box box-solid">
     <div class="box-header with-border">
       <h3 class="box-title">{$title}</h3>
-  
+
     </div>
     <div class="box-body">
-    
+
     </div><!-- /.box-body -->
   </div>
   <!-- 列表 -->
@@ -26,7 +26,7 @@
             <td>{$vo.id}</td><td>{$vo.nickname}</td>
             <td>{$vo.title}</td>
         <td>{$vo.addtime|date="Y-m-d H:i",###}</td>
-          
+
             <td>
               <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
@@ -36,7 +36,7 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{:url('index/admin/addblog',array('id'=>$vo['id']))}">编辑</a></li>
-           
+
                   <li class="divider"></li>
                   <li><a href="javascript:setstat({$vo.id},-1);">删除</a></li>
                 </ul>
@@ -46,16 +46,16 @@
           {/volist}
         </tbody>
       </table>
-       
+
     </div><!-- /.box-body -->
     <div class="box-footer clearfix">
 	    <ul class="pagination pagination-sm no-margin pull-right">{$page}</ul>
-	  </div>    
+	  </div>
   </div>
 <script type="text/javascript">
 function setstat(id,t){
   if(t == -1){
-    var r = confirm("确定删除该视频？");
+    var r = confirm("确定删除该item？");
   }
   if(r == true){
     $.post(location.href,{"id":id,"t":t},function(data){

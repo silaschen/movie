@@ -4,18 +4,18 @@
   <div class="box box-solid">
     <div class="box-header with-border">
       <h3 class="box-title">用户列表</h3>
-     
+
     </div>
     <div class="box-body">
-      <form method="GET" action="" id='form'>
+      <form method="GET" action="{:url('index/admin/userlist')}" id='form'>
       <div class="row">
         <div class="col-xs-4 col-md-3">
           <div class="input-group">
-            <input name="word" type='text' class='form-control' placeholder='昵称关键词搜索..'>
+            <input name="word" type='text' value="{:$_GET['word']}" class='form-control' placeholder='昵称关键词搜索..'>
             <span class="input-group-addon" onclick="$('#form').submit();"><i class="fa fa-search"></i></span>
-
-            <a title='清除条件' class="input-group-addon" href=""><i class="fa fa-remove"></i></a>
-
+{if condition="$_GET['word'] neq ''"}
+            <a title='清除条件' class="input-group-addon" href="{:url('index/admin/userlist')}"><i class="fa fa-remove"></i></a>
+{/if}
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
             <td>{if condition="$vo.sex eq 1"}<span class="label label-info">男</span>{else /}<span class="label label-danger">女</span>{/if}</td>
             <td>{$vo.phone}</td>
           <td>{$vo.addtime|date='Y-m-d H:i',###}</td>
-          
+
             <td>
               <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
@@ -61,23 +61,23 @@
           {/foreach}
         </tbody>
       </table>
-     
+
     </div><!-- /.box-body -->
     <div class="box-footer clearfix">
 	    <ul class="pagination pagination-sm no-margin pull-right">{$list->render()}</ul>
-	  </div>    
+	  </div>
   </div>
 <script type="text/javascript">
 function setstat(id,t){
   if(t == -1){
-    var r = confirm("确定删除该文章？");
+    var r = confirm("确定删除该user？");
   }else if(t == 1){
-    var r = confirm("确定显示该文章？");
+    var r = confirm("确定显示该user？");
   }else if(t == 0){
-    var r = confirm("确定隐藏该文章？");
+    var r = confirm("确定隐藏该user？");
   }
   if(r == true){
-    $.post(location.href,{"id":id,"t":t},function(data){
+    $.post({:url('index/admin/deluser')},{"id":id,"t":t},function(data){
       alert(data.msg);
       if(data.ret == 1) location.reload();
     },'JSON');

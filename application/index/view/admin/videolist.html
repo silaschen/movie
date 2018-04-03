@@ -7,14 +7,14 @@
       <a href="{:url('index/admin/addvideo')}" class='btn btn-success btn-xs pull-right'>添加视频</a>
     </div>
     <div class="box-body">
-      <form method="GET" action="{:url('Sys/artlist')}" id='form'>
+      <form method="GET" action="{:url('admin/videolist')}" id='form'>
       <div class="row">
         <div class="col-xs-4 col-md-3">
           <div class="input-group">
-            <input name="word" type='text' class='form-control' value="" placeholder='标题关键词搜索..'>
+            <input name="word" type='text' class='form-control' value="{:$_GET['word']}" placeholder='标题关键词搜索..'>
             <span class="input-group-addon" onclick="$('#form').submit();"><i class="fa fa-search"></i></span>
             {if condition="$_GET['word'] neq ''"}
-            <a title='清除条件' class="input-group-addon" href="{:url('Sys/artlist')}"><i class="fa fa-remove"></i></a>
+            <a title='清除条件' class="input-group-addon" href="{:url('admin/videolist')}"><i class="fa fa-remove"></i></a>
             {/if}
           </div>
         </div>

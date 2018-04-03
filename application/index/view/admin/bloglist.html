@@ -3,18 +3,18 @@
   <!-- 搜索 -->
   <div class="box box-solid">
     <div class="box-header with-border">
-      <h3 class="box-title">视频列表</h3>
-      <a href="{:url('Sys/addvideo')}" class='btn btn-success btn-xs pull-right'>添加视频</a>
+      <h3 class="box-title">blog list</h3>
+      <a href="{:url('admin/addblog')}" class='btn btn-success btn-xs pull-right'>添加blog</a>
     </div>
     <div class="box-body">
-      <form method="GET" action="{:url('Sys/artlist')}" id='form'>
+      <form method="GET" action="{:url('admin/bloglist')}" id='form'>
       <div class="row">
         <div class="col-xs-4 col-md-3">
           <div class="input-group">
             <input name="word" type='text' class='form-control' value="" placeholder='标题关键词搜索..'>
             <span class="input-group-addon" onclick="$('#form').submit();"><i class="fa fa-search"></i></span>
               {if condition="$_GET['word'] neq ''"}
-            <a title='清除条件' class="input-group-addon" href="{:url('Sys/artlist')}"><i class="fa fa-remove"></i></a>
+            <a title='清除条件' class="input-group-addon" href="{:url('admin/bloglist')}"><i class="fa fa-remove"></i></a>
             {/if}
           </div>
         </div>
@@ -37,7 +37,7 @@
           <tr>
             <td>{$vo.id}</td><td>{$vo.title}</td>
         <td>{$vo.addtime|date="Y-m-d H:i",###}</td>
-          
+
             <td>
               <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
@@ -47,7 +47,7 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{:url('index/admin/addblog',array('id'=>$vo['id']))}">编辑</a></li>
-           
+
                   <li class="divider"></li>
                   <li><a href="javascript:setstat({$vo.id},-1);">删除</a></li>
                 </ul>
@@ -57,16 +57,16 @@
           {/volist}
         </tbody>
       </table>
-       
+
     </div><!-- /.box-body -->
     <div class="box-footer clearfix">
 	    <ul class="pagination pagination-sm no-margin pull-right">{$page}</ul>
-	  </div>    
+	  </div>
   </div>
 <script type="text/javascript">
 function setstat(id,t){
   if(t == -1){
-    var r = confirm("确定删除该视频？");
+    var r = confirm("确定删除该blog？");
   }
   if(r == true){
     $.post(location.href,{"id":id,"t":t},function(data){
