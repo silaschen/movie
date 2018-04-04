@@ -153,6 +153,7 @@ class Index extends Common
 		$res = Db::query($sql);
 		foreach($res as $k=>$v){
 			$res[$k]['time']= json_decode($v['time']);
+			$res[$k]['ablebuy']  = ($v['etime']+86400)<time() ? false : true;
 		}
 		$this->UpdateVideoView($id);
 		$this->assign('moviedates',$res);
@@ -209,7 +210,7 @@ class Index extends Common
 		$data['uid'] = \think\Session::get('login_uid');
 		$data['money'] = Db::query("select price from video where id='{$data['videoid']}'")[0]['price'];
 		$data['addtime'] = time();
-		$data['status'] = 2;
+		$data['status'] = 2;//
 		$data['payinfo'] = json_encode(['banknum'=>$data['banknum'],'bankname'=>$data['bankname']]);
 		$data['orderid'] = md5($data['uid'].$data['money'].$data['videoid'].time());
 		unset($data['bankname']);

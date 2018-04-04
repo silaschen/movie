@@ -3,17 +3,8 @@
 
 <!-- AddThis Smart Layers END -->
 	<div class="m-tickets-instantly">
-		<h4>Book tickets instantly</h4>
-		<div class="fleft m-select">
-                        <label><input id="rdbMovie" name="rdbMovieSearch" type="radio" class="checkins" onclick="fnOcCriteria('ET', 'MT');" checked="checked">
-                        <span class="fleft mr20">Movies</span></label>
-                        <label><input id="rdbCinema" name="rdbMovieSearch" type="radio" class="checkins" onclick="fnOcCriteria('VN', 'MT');" checked="checked">
-                        <span class="fleft mr20">Cinemas</span></label>
-                    </div>
+		<h4>please to watch movie during the valid date,Don't forget the expire.</h4>
 
-		<div class="m-select-date">
-					<select class="list_of_movies"><option value="">Select Date</option><option style="padding-left: 10px;" value="ANAN">Today, 18 jun</option><option style="padding-left: 10px;" value="CHDM">Tomorrow, 19 jun</option><option style="padding-left: 10px;" value="CHDM">saturday, 20 jun</option><option style="padding-left: 10px;" value="CHDM">sunday, 21 jun</option></select>
-		</div>
 		<div class="clearfix"></div>
 	</div>
 	<div class="now-showing-list">
@@ -40,14 +31,19 @@
 			{foreach name='moviedates' item='da'}
 			<div class="movie-date-selection">
 				<ul>
-				<!-- <li>valid date:{$da.btime|date="Y-m-d",###}----{$da.etime|date="Y-m-d",###}</li> -->
+				
 					<li class="location">
-						<a href="pic-a-movie.html"><i class="fa fa-map-marker"></i>{$da.name}: {$da.address}</a>
+						<a><i class="fa fa-map-marker"></i>{$da.name}: {$da.address}&nbsp{if condition="$da['ablebuy'] eq false"}<span class="label label-danger">No validate</span>{/if}</a>
 					</li>
 					{foreach name='da.time' item='v'}
+					{if condition="$da['ablebuy'] eq true"}
 					<li class="time">
 						<a href="{:url('Index/index/payment',array('cid'=>$da['cinemaid'],'vid'=>$film[0]['id'],'time'=>$v,'tid'=>$da['id']))}">{$v}</a>
+					</li>{else/}
+						<li class="time">
+						<s>{$v}</s>
 					</li>
+					{/if}
 					{/foreach}
 	
 				</ul>

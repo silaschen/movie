@@ -462,23 +462,63 @@ function kill(){
 
 
 		public function likelist(){
-			$this->isAdmin();
-			$p = input('page')?input('page'):1;
-			$list = Db::name('likes')
-			->field("likes.id,user.nickname,blog.title,likes.addtime")
-			->join('blog','blog.id=likes.blogid')
-			->join('user','user.id=likes.userid')
-			->paginate(10);//分页
+					$this->isAdmin();
+			if(Request::instance()->isGet()){
+				$p = input('page')?input('page'):1;
+				$list = Db::name('likes')
+				->field("likes.id,user.nickname,blog.title,likes.addtime")
+				->join('blog','blog.id=likes.blogid')
+				->join('user','user.id=likes.userid')
+				->paginate(10);//分页
 
+				$page = $list->render();
+				$this->assign('page',$page);// 赋值分页输出
+				//分页跳转的时候保证查询条件
+				$this->assign('list',$list);
+				return $this->fetch('likelist',['title'=>'点赞列表','eq'=>'点赞记录']);
+
+			}else{
+
+				$sql = sprintf("delete from likelist where id=%d",input('id'));
+				Db::execute($sql);
+				exit(json_encode(['code'=>1,'msg'=>'delete the user successfully']));
+			}
+			
+	}
+
+
+	public function orderlist(){
+		$this->IsAdmin();
+		if(\think\Request::instance()->isGet()){
+			$this->title = '订单列表';
+			$p = input('p')?input('p'):1;
+			$word = input('word');
+			$map = array();
+			if($word) $map['fo.orderid|u.nickname'] = array('like','%'.$word.'%');
+			$list = Db::name('film_order')
+			->alias('fo')
+			->join("video v","fo.videoid=v.id")
+			->join("cinemas c","fo.cinemaid=c.id")
+			->join("user u","fo.uid=u.id")
+			->field("fo.id,fo.orderid,fo.time,v.title,c.name,fo.money,c.name,fo.addtime,u.nickname,u.phone,fo.status")
+			->where($map)
+			->paginate(10);
 			$page = $list->render();
 			$this->assign('page',$page);// 赋值分页输出
 			//分页跳转的时候保证查询条件
 			$this->assign('list',$list);
-			return $this->fetch('likelist',['title'=>'点赞列表','eq'=>'点赞记录']);
+			return $this->fetch('checklist',['title'=>'order列表','eq'=>'订单管理']);
+		}else{
+			$id = input('id');
+			$order = Db::query("select * from film_order where id='{$id}' AND status=2")[0];
+			if($order){
+				Db::execute("update film_order SET status=3 where id='$id'");
+				exit(json_encode(['code'=>1,'msg'=>'出票成功']));
+			}
+
+			exit(json_encode(['code'=>0,'msg'=>'出票失败']));
+		}
 	}
-
-
-
 
 
 }

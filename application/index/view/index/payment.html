@@ -22,8 +22,8 @@
 					<div class="tab-grids event-tab-grids">
 						<div id="tab1" class="tab-grid">
 							<img src="{$Think.config.WEBSERVER}/public/film/images/payment.png" alt="payment" />
-							<input name="banknum" type="text" class="payment" value="Enter Your Card Number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Card Number';}">
-							<input name="bankname" type="text" class="payment" value="Your Name On Card" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Name On Card';}">
+							<input name="banknum" type="text" class="payment" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Card Number';}">
+							<input name="bankname" type="text" class="payment" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Name On Card';}">
 						
 							<input type="submit" class="go-to-pay" value="make payment" onclick="makeOrder()">
 
@@ -123,9 +123,19 @@
 			var time = $("input[name='time']").val();
 			var banknum = $("input[name='banknum']").val();
 			var bankname = $("input[name='bankname']").val();
+
+			if(banknum == "" || bankname == ""){
+				alert('please input your pay info');
+				return false;
+			}
 			$.post('{:url('index/index/orderfilm')}',{'videoid':vid,'cinemaid':cid,'time':time,'ticketid':tid,'banknum':banknum,'bankname':bankname},function(data){
 
+					alert(data.msg);
+					if(data.code === 1){
 
+						location.href="{:url('index/index/myticket')}";
+						
+					}
 
 
 
