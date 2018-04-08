@@ -292,7 +292,7 @@ function logout(){
 					<div class="search2">
 					  <form>
 						<i class="fa fa-search"></i>
-						 <input type="text" value="Search for a movie, play, event, sport or more" onfocus="this.value = '';" onblur="if (this.value == '') this.value = 'Search for a movie, play, event, sport or more';}"/>
+						 <input type="text" id="search">
 					  </form>
 					</div>
 				</div>
@@ -408,8 +408,13 @@ function logout(){
 
 
 
+ 
+        <div class="col-md-12 text-center" style="padding: 15px;" id="searchbox">
+                
 
 
+
+        </div>
 
 
 	{block name='main'}{/block}
@@ -469,5 +474,69 @@ function logout(){
 						});
 					</script>
 				<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+
+                <script type="text/javascript">
+                    $("#search").on('input propertychange',function(){
+
+                        keyuphandle();
+
+                    });
+
+                    var sktimer=null;
+
+                   function keyuphandle() {
+                    clearTimeout(sktimer);
+                    var anima=`<i style='font-size:16em;' class="fa fa-spinner  fa-spin fa-pulse fa-fw"></i>
+<span class="sr-only">Loading...</span>`;
+                        $("#searchbox").html(anima);
+                    sktimer = setTimeout(dosearch, 500);
+                }
+
+                function dosearch() {
+                    
+                    var k = $.trim($("#search").val());
+                    $.get("{:url('index/index/search')}?keytext="+k+"",function(data){
+
+                            if(data.code===1){
+
+
+                            var con=`<ul>`;
+
+                            $.each(data.list,function(k,obj){
+
+                                    con+=`<li class='col-md-3'>
+                            <div class="f-movie">
+                                <div class="f-movie-img">
+                                    <a href="movies.html"><img src="{$Think.config.WEBSERVER}/`+obj.cover+`" alt="" /></a>
+                                </div>
+                                    <div class="f-movie-name">
+                                        <a href="movies.html">{$ovo.title}</a>
+                                        <p>#在线播放#</p>
+                                    </div>
+                                <div class="f-buy-tickets">
+                                    <a href="{:url('index/index/playonline',array('id'=>$ovo['id']))}">点击播放</a>
+                                </div>
+                            </div>
+                        </li>`;
+
+                            });
+
+                            con+=  `</ul>`;
+                            // console.log(con);
+                           
+        
+                            }else{
+
+                              con='没有相关结果';  
+                            }
+
+                             $("#searchbox").html(con);
+
+
+                    },'JSON');
+                }
+
+                </script>
 </body>
 </html>

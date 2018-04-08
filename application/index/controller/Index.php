@@ -90,6 +90,21 @@ class Index extends Common
     }
 
 
+
+    //搜索
+    public function search(){
+
+    		$key=input('keytext');
+    		$data = Db::query(sprintf("select * from video where title like '%%%s%%' and cate=2",$key));
+    		if(empty($data)) exit(json_encode(['code'=>-1]));
+    		exit(json_encode(['code'=>1,'list'=>$data]));
+
+
+
+    }
+
+
+
     //注册,exit,josn_encode($param)
 	public function register(){
 			$data = \think\Request::instance()->post();//获取前端传过来的的值，数组
