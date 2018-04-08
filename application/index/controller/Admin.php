@@ -98,6 +98,32 @@ function kill(){
 	}
 
 
+
+		public function cinemalist(){
+		$this->isAdmin();
+		if(\think\Request::instance()->isGet()){
+
+				$p = input('p')?input('p'):1;
+			$word = input('word');
+			$map = array();
+			if($word) $map['name'] = array('like','%'.$word.'%');
+			$list = Db::name('cinemas')->where($map)->paginate(10);//分页
+			$page = $list->render();
+			$this->assign('page',$page);// 赋值分页输出
+			//分页跳转的时候保证查询条件
+			$this->assign('list',$list);
+			return $this->fetch('cinemalist',['title'=>'影院列表','eq'=>'影院管理']);
+
+		}else{
+
+			$ID = input('id');
+			Db::execute("delete from cinemas where id=$ID");
+			exit(json_encode(['code'=>1,'msg'=>'successfully']));
+		}
+			
+	}
+
+
 	public function deluser(){
 		$this->isAdmin();
 		$id = input('id');
@@ -507,16 +533,9 @@ function kill(){
 			$this->assign('page',$page);// 赋值分页输出
 			//分页跳转的时候保证查询条件
 			$this->assign('list',$list);
-			return $this->fetch('checklist',['title'=>'order列表','eq'=>'订单管理']);
+			return $this->fetch('orderlist',['title'=>'order列表','eq'=>'订单管理']);
 		}else{
-			$id = input('id');
-			$order = Db::query("select * from film_order where id='{$id}' AND status=2")[0];
-			if($order){
-				Db::execute("update film_order SET status=3 where id='$id'");
-				exit(json_encode(['code'=>1,'msg'=>'出票成功']));
-			}
-
-			exit(json_encode(['code'=>0,'msg'=>'出票失败']));
+			
 		}
 	}
 
