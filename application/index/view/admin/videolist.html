@@ -49,7 +49,9 @@
                   <span class="sr-only">+</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="{:url('admin/addvideo',array('id'=>$vo['id']))}">编辑</a></li>
+                  {if condition="$vo['cate'] neq '1'"}
+                  <li><a href="{:url('admin/addonline',array('id'=>$vo['id']))}">编辑</a></li>
+                  {/if}
 
                   <li class="divider"></li>
                   <li><a href="javascript:setstat({$vo.id},-1);">删除</a></li>

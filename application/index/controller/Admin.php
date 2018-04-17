@@ -272,22 +272,25 @@ function kill(){
 
 		$this->isAdmin();
 		if(\think\Request::instance()->isGet()){
+			$id = input('id');
+			$video = Db::query("select * from video where id=$id")[0];
+			$this->assign('video',$video);
 			return $this->fetch('addonline',['title'=>'add video','eq'=>1]);
 		}else{
 			$data = \think\Request::instance()->post();
-
 			// 新增
 			$video['title'] = $data['title'];
 			$video['cate'] = $data['cate'];
 			$video['cover'] = $data['cover'];
-
 			$video['publishtime'] = strtotime($data['publishtime']);
 			$video['director'] = $data['director'];
 			$video['address'] = $data['address'];
-			$r = Db::name('video')->insertGetId($video);
-
+			if($data['id']){
+				$r = Db::name('video')->update($video);
+			}else{
+				$r = Db::name('video')->insertGetId($video);
+			}
 			if($r){
-
 				exit(json_encode(['code'=>1,'msg'=>'successfully upload']));
 			}else{
 				exit(json_encode(['code'=>0,'msg'=>'failed upload']));

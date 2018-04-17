@@ -15,56 +15,28 @@
 					<h3>支付方式</h3>
 					<div class="tabs-box">
 					<ul class="tabs-menu booking-menu">
-						<li><a href="#tab1">Credit Card</a></li>
+						<li><a href="#tab1">银联卡</a></li>
 						<li><a href="#tab4">支付宝</a></li>
 					</ul>
 					<div class="clearfix"> </div>
 					<div class="tab-grids event-tab-grids">
 						<div id="tab1" class="tab-grid">
 							<img src="{$Think.config.WEBSERVER}/public/film/images/payment.png" alt="payment" />
-							<input name="banknum" type="text" class="payment" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Card Number';}">
-							<input name="bankname" type="text" class="payment" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Name On Card';}">
+							<input name="banknum" type="text" class="payment" placeholder="您的卡号">
+							<input name="bankname" type="text" class="payment" placeholder="卡上的姓名">
 						
-							<input type="submit" class="go-to-pay" value="make payment" onclick="makeOrder()">
+							<input type="submit" class="go-to-pay" value="确认" onclick="makeOrder()">
 
 						</div>
 				
 				
 						<div id="tab4" class="tab-grid">
 							<div class="row">
-                        <div class="col-md-6">
-                            <img class="pp-img" src="{$Think.config.WEBSERVER}/public/film/images/paypal.png" alt="Image Alternative text" title="Image Title">
-                            <p>Important: You will be redirected to PayPal's website to securely complete your payment.</p><a class="btn btn-primary">Checkout via Paypal</a>	
+                        <div class="col-md-12">
+                            <img class="pp-img" src="{$Think.config.WEBSERVER}/public/pay.png" alt="Image Alternative text" title="Image Title">
+                            <p style="color: red">请使用支付宝扫一扫完成付款.由于支付接口的对接需要真实的工商注册信息，在这里不再演示。</p><a class="btn btn-primary">(扫一扫)</a>	
                         </div>
-                        <div class="col-md-6">
-                            <form class="cc-form">
-                                <div class="clearfix">
-                                    <div class="form-group form-group-cc-number">
-                                        <label>Card Number</label>
-                                        <input class="form-control" placeholder="xxxx xxxx xxxx xxxx" type="text"><span class="cc-card-icon"></span>
-                                    </div>
-                                    <div class="form-group form-group-cc-cvc">
-                                        <label>CVV</label>
-                                        <input class="form-control" placeholder="xxxx" type="text">
-                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    <div class="form-group form-group-cc-name">
-                                        <label>Card Holder Name</label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                    <div class="form-group form-group-cc-date">
-                                        <label>Valid Thru</label>
-                                        <input class="form-control" placeholder="mm/yy" type="text">
-                                    </div>
-                                </div>
-                                <div class="checkbox checkbox-small">
-                                    <label>
-                                        <input class="i-check" type="checkbox" checked="">Add to My Cards</label>
-                                </div>
-                                <input class="btn btn-primary" type="submit" value="Proceed Payment">
-                            </form>
-                        </div>
+          
                     </div>
 						</div>
 							</div>			
@@ -90,24 +62,22 @@
 			</div>
 			<div class="col-md-4">
 			<div class="payment-right">
-				<h3>Ticket Summary</h3>
-				<h6><span>Movie-Name:</span>{$film['title']}</h6>
-				<p><span>Theatre:</span> {$cinema['name']} </p>
-				<p><span>Lake:</span> Kerala</p>
-				<p><span>Location:</span> {$cinema['address']}</p>
-				<p><span>Date:</span> {$ticket['btime']|date="Y-m-d",###}---{$ticket['etime'|date="Y-m-d",###]}</p>
-				<p><span>Time:</span> {$time}</p>
-				<p><span>Seat Info:</span> 影院随机分配</p>
-				<p><span>Qty:</span> 4</p>
-				<h4><span>Total :</span>{$film['price']}</h4>
+				<h3>订单信息</h3>
+				<h6><span>电影名称:</span>{$film['title']}</h6>
+				<p><span>电影院:</span> {$cinema['name']} </p>
+				<p><span>地址:</span> {$cinema['address']}</p>
+				<p><span>日期:</span> {$ticket['btime']|date="Y-m-d",###}---{$ticket['etime'|date="Y-m-d",###]}</p>
+				<p><span>放映时间:</span> {$time}</p>
+				<p><span>座位:</span> 影院随机分配</p>
+				<h4><span>共 :</span>{$film['price']}</h4>
 				<p>+ (平台服务费 : ￥. 1.00 )</p>
-				<h5>Total :￥. {$film['price']+1}</h5>
+				<h5>共 :￥. {$film['price']+1}</h5>
 			</div>
 			<div class="ticket-note">
-				<h3>Note:</h3>
+				<h3>注意:</h3>
 				<ol>
 					<li><p>一旦确认付款，该票无法退换，请在有效期内观影.</p></li>
-					<li><p>In case of Credit/Debit Card bookings, the Credit/Debit Card and Card holder must be present at the ticket counter while collecting the ticket(s).</p></li>
+					<li><p>请确认付款信息无误后再支付，避免产生经济纠纷.</p></li>
 				</ol>
 			</div>
 			</div>

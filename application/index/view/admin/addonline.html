@@ -10,7 +10,7 @@
          
             <div class='form-group'>
               <label>标题：</label>
-              <input type='text' name='title' class='form-control'>
+              <input type='text' name='title' class='form-control' value="{$video['title']}">
             </div>
           
 
@@ -18,7 +18,6 @@
                 
                 <label>分类</label>
                 <select class="form-control" name="cate">
-                  <option value="1">影院购票</option>
                   <option value="2">在线资源</option>
                 </select>
               </div>
@@ -33,7 +32,7 @@
                     <div id="files" class="files">
                     </div>
                     <div class='showcover'>
-              
+                          <img src="{$Think.Config.WEBSERVER}/{$video['cover']}">
                     </div>
                 <input class='hide' name='cover' id='cover'>
             </div>
@@ -42,7 +41,7 @@
             
             <div class="form-group">
               <label>导演</label>
-              <input type="text" name="director" class="form-control">
+              <input type="text" name="director" class="form-control" value="{$video['director']}">
             </div>
 
             
@@ -60,7 +59,7 @@
 
             <div class="form-group">
               <label>影视地址</label>
-              <input type="url" name="address" class="form-control">
+              <input type="url" name="address" class="form-control" value="{$video['url']}">
             </div>
 
 
@@ -87,46 +86,16 @@ function saveart(){
   var address = $("input[name='address']").val();
   $.post("{:url('Admin/addonline')}",{'title':title,'cover':cover,'publishtime':publishtime,'director':director,'cate':cate,'address':address},function(data){
       alert(data.msg);
+      if(data.code===1){
+        location.reload();
+      }
    
   },'JSON');
 }
 
 
-function AddOne(){
-  $("#ticket").modal('show');
-}
 
-function AddOneTime(obj){
 
-  var id = $(obj).parent().attr('data-id');
-  console.log(id);
-  $("#btntimeadd").attr('data-cid',id);
-  $("#addtime").modal('show');
-
-}
-
-function pickCinema(){
-
-  var cinemaid = $("#cinema option:selected").val();
-  var cinemaname = $("#cinema option:selected").text();
-  var start = $("#publishstart").val();
-  var end = $("#publishend").val();
-
-  var domcinema = `<div class="well ticked_cinema" data-id= `+cinemaid+` data-start=`+start+` data-end=`+end+` style='word-break:break-all'>
-                        `+cinemaname+`<button type='button' class="btn btn-primary" onclick="AddOneTime(this)">+</button>
-                      </div>`;
-
-    $("#cinemabox").append(domcinema);
-
-}
-
-function AddOneTi(){
-  var newtime = $("#showmin").val();
-  var newdom = `<span class="label label-warning">`+newtime+`</span>&nbsp`;
-  var id = $("#btntimeadd").attr('data-cid');
-  $("div[data-id='"+id+"']").append(newdom);
-
-}
 </script>
 <script src="/public/com/jQuery-File-Upload-9.9.3/js/vendor/jquery.ui.widget.js"></script>
 <script src="/public/com/jQuery-File-Upload-9.9.3/js/load-image.all.min.js"></script>

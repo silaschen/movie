@@ -350,9 +350,8 @@ class Index extends Common
 	}
 
 
-    public function sendm(){
-        $body = "please click the link below to finish check"."\n"."http://www.liondog.cn";
-        var_dump($this->sendmail('chensiwei1@outlook.com','CHECK account',$body));
+    public function about(){
+        return $this->fetch('about');
     }
 
 

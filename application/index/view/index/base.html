@@ -301,12 +301,12 @@ function logout(){
 	<div class="bootstrap_container">
             <nav class="navbar navbar-default w3_megamenu" role="navigation">
                 <div class="navbar-header">
-          			<button type="button" data-toggle="collapse" data-target="#defaultmenu" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="index.html" class="navbar-brand"><i class="fa fa-home"></i></a>
+          			<button type="button" data-toggle="collapse" data-target="#defaultmenu" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="{:url('index/index/index')}" class="navbar-brand"><i class="fa fa-home"></i></a>
 				</div><!-- end navbar-header -->
         
             <div id="defaultmenu" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html">主页</a></li>	
+                    <li class="active"><a href="{:url('index/index/index')}">主页</a></li>	
                     <!-- Mega Menu -->
 			
 
@@ -328,7 +328,7 @@ function logout(){
 									<a href="events.html"><img src="{$Think.config.WEBSERVER}/{$nb.cover}" alt="" /></a>
 								</div>
 								<div class="e-buy-tickets">
-									<a href="{:url('index/index/selectshow',array('id'=>$nb['id']))}">BUY TICKETS</a>
+									<a href="{:url('index/index/selectshow',array('id'=>$nb['id']))}">购票</a>
 								</div>
 							</div>
                                     </div>
@@ -389,9 +389,9 @@ function logout(){
 					
 					</li>
 
-                        <li><a href="about.html">关于我们</a></li>
+                        <li><a href="{:url('index/index/about')}">关于我们</a></li>
 
-                        <li><a href="contact.html">联系我们</a></li>
+                      
 
 
 			
@@ -444,8 +444,8 @@ function logout(){
 					<div class="clearfix"></div>
 				</div> -->
 				<div class="recent_24by7">
-					<a class="play-icon popup-with-zoom-anim" href="#small-dialog" href="#"><i class="fa fa-calendar-o"></i>Resend Booking Confirmation</a>
-					<a href="support.html"><i class="fa fa-question"></i>24/7 Customer Care</a>
+					<a class="play-icon popup-with-zoom-anim"><i class="fa fa-calendar-o"></i>Resend Booking Confirmation</a>
+					<a><i class="fa fa-question"></i>7*24客服电话000000000</a>
 				</div>
 					<div class="clearfix"></div>
 			</div>
@@ -455,7 +455,7 @@ function logout(){
 			<div class="clearfix"></div>
 		</div>
 			<div class="copy-rights text-center">
-				<p>Copyright &copy; 2018.立方体影视 All rights reserved.More infomation</p>
+				<p>Copyright &copy; 2018.立方体影视 All rights reserved</p>
 			</div>
 	</div>
  <script type="text/javascript">
@@ -478,9 +478,7 @@ function logout(){
 
                 <script type="text/javascript">
                     $("#search").on('input propertychange',function(){
-
                         keyuphandle();
-
                     });
 
                     var sktimer=null;
@@ -496,6 +494,11 @@ function logout(){
                 function dosearch() {
                     
                     var k = $.trim($("#search").val());
+                    console.log(k);
+                    if(k==''){
+                          $("#searchbox").html("没有搜索到数据");
+                          return false;
+                    }
                     $.get("{:url('index/index/search')}?keytext="+k+"",function(data){
 
                             if(data.code===1){
