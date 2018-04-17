@@ -81,11 +81,11 @@ class Index extends Common
 
 		}
 
-
-
 		$this->assign('blog',$blog);
-		//在线视频
-		$online = Db::name('video')->where(['cate'=>2])->select();
+
+		//在线视频,6条
+		$online = Db::query("select * from video where cate=2 order by id desc limit 6");
+		//传递数据
 		$this->assign(['now'=>$now,'week'=>$week,'will'=>$will,'day'=>$day,'online'=>$online]);
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 		//top moview
@@ -93,16 +93,18 @@ class Index extends Common
 		$top = Db::query("select id,title,view from video where cate=1 order by view desc limit 6");
 		$this->assign(['top'=>$top]);
 
+		//渲染视图
 		return $this->fetch('index');
     }
 
 
 
-    //搜索
+    //搜索,函数，前端的视频搜索会发起ajax请求到这个函数，很简单一个sql like模糊查询，将结果返回给前端，前端js将结果遍历展示即可
     public function search(){
 
     		$key=input('keytext');
     		$data = Db::query(sprintf("select * from video where title like '%%%s%%' and cate=2",$key));
+    		//%%在''中表示一个%
     		if(empty($data)) exit(json_encode(['code'=>-1]));
     		exit(json_encode(['code'=>1,'list'=>$data]));
 
@@ -122,7 +124,6 @@ class Index extends Common
 			if($status){
 				exit(json_encode(array('code'=>-10,'msg'=>'此昵称已被注册')));
 			}
-
 			//插入sql
 			$addsql=sprintf("insert into user(nickname,email,phone,password,sex,addtime) VALUES ('%s','%s','%s','%s','%s','%s')",$data['nickname'],$data['email'],$data['phone'],$data['password'],$data['sex'],time());
 			//执行插入sql语句
@@ -157,7 +158,7 @@ class Index extends Common
 
 		\think\Session::set('login_uid',$user[0]['id']);
 		\think\Session::set('login_nick',$user[0]['nickname']);
-	//	\redisObj\redisTool::getRedis()->lpush('loginuser',$user['id']);
+
 	}
 
 
@@ -232,7 +233,7 @@ class Index extends Common
 		$data['uid'] = \think\Session::get('login_uid');
 		$data['money'] = Db::query("select price from video where id='{$data['videoid']}'")[0]['price'];
 		$data['addtime'] = time();
-		$data['status'] = 2;//
+		$data['status'] = 2;//支付无法演示，直接默认已付款
 		$data['payinfo'] = json_encode(['banknum'=>$data['banknum'],'bankname'=>$data['bankname']]);
 		$data['orderid'] = md5($data['uid'].$data['money'].$data['videoid'].time());
 		unset($data['bankname']);
@@ -344,6 +345,12 @@ class Index extends Common
     }
 
 
+    /**
+		*在线播放视频函数
+		*拿到视频id，读取数据库此条视频信息，并把信息传递到前端
+		*并读取8条视频信息，展示在播放器右侧
+		*渲染playonline.html播放界面
+    */
     public function playonline(){
     	//导航推荐,及在线影视推荐
     	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
@@ -357,12 +364,21 @@ class Index extends Common
 	}
 
 
+	/**
+		*about,关于我们，
+		*没有数据信息，纯静态界面展示
+		*return $this->fetch('abput'),渲染about.html出来
+	*/
     public function about(){
         return $this->fetch('about');
     }
 
 
-    //导航栏在线否票，在线影院
+    /**
+		*公用方法，主要是获取4个购票信息，4个在线播放信息，并传递到前端视图，
+		*由于很多方法都需要这两条信息，因此单独拿出封装函数
+
+    */
     private  function navdata(){
     	$navbuy = Db::query("select * from video where cate=1 order by id desc limit 4");
     	$this->assign('navbuy',$navbuy);
@@ -372,6 +388,11 @@ class Index extends Common
 
 /*
 ******************************************************************************************************************************************************************************************************************************************************************************************/
+	/**
+	*点赞函数
+	*首先判断有没有登录，没登录不能点赞
+	*再去判断当前用户今日是否有点赞记录，若存在记录则不能再次点赞
+	*/
 	public function like(){
 		//判断登录状态，不登录不能点赞
 		if(!\think\Session::get('login_uid')){
@@ -406,7 +427,7 @@ class Index extends Common
 
 	//登出
 	public function logout(){
-
+		//即消除登录相关session信息，有关session请百度
 		\think\Session::set('login_uid',null);
 		\think\Session::set('login_nick',null);
 		exit(json_encode(array('code'=>1)));
