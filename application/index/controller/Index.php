@@ -8,13 +8,14 @@ use app\index\controller\Common;
 class Index extends Common
 {
 	/**
-	*主页
+	*主页函数
 	*主要是去数据库请求各个模块数据
 	*Db::query()  数据库查询sql执行
 	*/
     public function index(){
     	//导航推荐,及在线影视推荐
-    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
+    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可，具体作用请看此函数
+
     	//首页大图轮播
 		$slides = Db::query('select * from slides order by id desc');//查询轮播图
 		$this->assign('slides',$slides);//传递轮播图信息
@@ -24,12 +25,16 @@ class Index extends Common
 		$this->assign('notice',$notice);
 
 		//轮播购票
-		$movie = Db::query("select * from video where cate=1");
+		$movie = Db::query("select * from video where cate=1 order by id desc limit 8");//轮播购票，选取最新的8条电影票
 		$this->assign('slidetwo',$movie);
+
 		//正在热映，本周，即将热映
 		$weekfinal = strtotime(date('Y-m-d', (time() + (7 - (date('w') == 0 ? 7 : date('w'))) * 24 * 3600+86400)));//本周末24:00时间戳
+
 		$daystart = strtotime(date('Y-m-d',time()));//今天的0:00时间戳
+
 		$dayover = $daystart+86400;//今天24:00时间戳
+
 		$now=$week=$will = array();
 		foreach($movie as $k=>$v){
 			if($v['publishtime'] <$dayover && $v['publishtime']>= $daystart){
@@ -47,30 +52,32 @@ class Index extends Common
 
 		}
 
-		//博客
-		$redis = \redisObj\redisTool::getRedis();
+		//博客，这一块采用了redis存储，redis的好处请百度。会首先从redis中读取博客信息，若存在直接读取，若不存在则从数据库中读取，并写入redis。
+		$redis = \redisObj\redisTool::getRedis();//创建一个redis的对象
 
-		if($redis->get('blogindex')){
+		if($redis->get('blogindex')){//redis中若存在blog的信息
 
 			$blog = json_decode($redis->get('blogindex'),true);
 		}else{
-
+			//redis中不存在，数据库读取5条
 			$blog = Db::query("select * from blog order by addtime desc limit 5");
+			//写入redis
 			$redis->setkey('blogindex',3600*24,json_encode($blog));
 		}
 
-
-
+		//读取博客的点赞数据
 		$daystart = strtotime(date("Y-m-d",time()));
 		$dayover = $daystart+24*3600;
 		for ($i=0; $i < count($blog); $i++) {
 			$countsql = "select count(*) as total from likes where blogid={$blog[$i]['id']}";
 			$blog[$i]['likecount'] = Db::query($countsql)[0]['total'];
 
+
+			//查询对于目前登录用户今天是否点赞
 			$existsql =    sprintf("select * from likes where userid=%d and blogid=%d and addtime between %d and %d" ,\think\Session::get('login_uid'),$blog[$i]['id'],$daystart,$dayover);
 			$existstatus=Db::query($existsql);
 
-			$blog[$i]['likestatus'] = $existstatus?1:0;
+			$blog[$i]['likestatus'] = \think\Session::get('login_uid') ? ($existstatus?1:0):0;
 
 		}
 
@@ -366,7 +373,13 @@ class Index extends Common
 /*
 ******************************************************************************************************************************************************************************************************************************************************************************************/
 	public function like(){
+		//判断登录状态，不登录不能点赞
+		if(!\think\Session::get('login_uid')){
+			exit(json_encode(array('code'=>-1,'msg'=>'你还没有登录')));
+
+		}
 		//strtotime() y-m-d 时间格式转化成时间戳
+
 		$blogid = input('blogid');
 		$daystart = strtotime(date("Y-m-d",time()));
 		$dayover = $daystart+24*3600;
@@ -374,7 +387,7 @@ class Index extends Common
 		$existsql=sprintf("select * from likes where userid=%d and blogid=%d and addtime between %d and %d" ,\think\Session::get('login_uid'),$blogid,$daystart,$dayover);
 		$existstatus=Db::query($existsql);
 		if($existstatus){
-			exit(json_encode(array('code'=>-1)));
+			exit(json_encode(array('code'=>-1,'msg'=>'您今天已经点赞')));
 		}
 		$sql = sprintf("INSERT INTO likes(blogid,userid,addtime) VALUES (%d,%d,%d)",$blogid,\think\Session::get('login_uid'),time());
 		$status=Db::execute($sql);
@@ -397,7 +410,6 @@ class Index extends Common
 		\think\Session::set('login_uid',null);
 		\think\Session::set('login_nick',null);
 		exit(json_encode(array('code'=>1)));
-
 
 	}
 
