@@ -201,11 +201,6 @@ class Index extends Common
 			$this->assign(['cid'=>$cid,'film'=>$film,'time'=>$time,'cinema'=>$cinema,'ticket'=>$ticket]);
 			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 			return $this->fetch('payment');
-		}else{
-			$data = Request::instance()->post();
-			var_dump($data);
-
-
 		}
 
 	}
@@ -213,6 +208,8 @@ class Index extends Common
 
 
 
+	//检测是否登录
+	//已登录返回true,否则false
 	protected function LoginStstus(){
 		if(\think\Session::get('login_uid') === null){
 			return false;
