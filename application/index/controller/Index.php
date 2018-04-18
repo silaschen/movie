@@ -117,6 +117,18 @@ class Index extends Common
     //注册,exit,josn_encode($param)
 	public function register(){
 			$data = \think\Request::instance()->post();//获取前端传过来的的值，数组
+			//格式判断，不能随意输入，这里就很好玩儿了，不能用户输个什么就是什么
+			//主要使用正则表达式进行过滤，正则表达式是很大一部分，可以在写论文的时候，用到很多了
+			$user_pattern = "/^[A-Za-z]+\w*/";
+			if(!preg_match($user_pattern, $data['nickname'])){
+				exit(json_encode(['code'=>-10,'msg'=>'用户名格式不对，再试一次']));
+			}
+
+			$phone_pattern = "/^1(3|5|7|9|6|8)\d{9}$/";
+			if(!preg_match($phone_pattern, $data['phone'])){
+				exit(json_encode(['code'=>-10,'msg'=>'请输入11位大陆手机号码']));
+			}
+
 			$data['password'] = md5($data['password']);
 			$findsql = "SELECT * from user where nickname='{$data['nickname']}'";
 			//Db::query($sql)  执行sql语句
