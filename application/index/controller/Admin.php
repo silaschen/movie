@@ -273,8 +273,12 @@ function kill(){
 		$this->isAdmin();
 		if(\think\Request::instance()->isGet()){
 			$id = input('id');
-			$video = Db::query("select * from video where id=$id")[0];
+			if($id){
+
+				$video = Db::query("select * from video where id=$id")[0];
 			$this->assign('video',$video);
+			}
+			
 			return $this->fetch('addonline',['title'=>'add video','eq'=>1]);
 		}else{
 			$data = \think\Request::instance()->post();
