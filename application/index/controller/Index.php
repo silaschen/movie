@@ -14,22 +14,56 @@ class Index extends Common
 	*/
     public function index(){
     	//导航推荐,及在线影视推荐
-    	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可，具体作用请看此函数
+    	$this->navdata();
+		//首页大图轮播，公告，轮播购票，在线视频
+		list($slides,$notice,$movie,$online,$top) = self::FetchData();
+		//正在热映，本周，即将热映
+		list($now,$week,$will) = self::buydata($movie);
+		//博客排行数据
+		$blog = self::Blogdata();
+		//传递数据
+		$this->assign(array(
+			'slides'=>$slides,
+			'notice'=>$notice,
+			'slidetwo'=>$movie,
+			'blog'=>$blog,
+			'now'=>$now,
+			'week'=>$week,
+			'will'=>$will,
+			'online'=>$online,
+			'top'=>$top
+		));
 
-    	//首页大图轮播
-		$slides = Db::query('select * from slides order by id desc');//查询轮播图
-		$this->assign('slides',$slides);//传递轮播图信息
+		//渲染视图
+		return $this->fetch('index');
+    }
+
+
+    /**
+    *首页所需数据，封装私有函数
+    */
+    private static function FetchData(){
+    	$slides = Db::query('select * from slides order by id desc');//查询轮播图
 
 		//首页公告
 		$notice = Db::query("select * from notice order by id desc limit 6");//选取最新6条公告信息
-		$this->assign('notice',$notice);
 
 		//轮播购票
 		$movie = Db::query("select * from video where cate=1 order by id desc limit 8");//轮播购票，选取最新的8条电影票
-		$this->assign('slidetwo',$movie);
+		//在线视频,6条
+		$online = Db::query("select * from video where cate=2 order by id desc limit 6");
+		$top = Db::query("select id,title,view from video where cate=1 order by view desc limit 6");
+        return array($slides,$notice,$movie,$online,$top);
 
-		//正在热映，本周，即将热映
-		$weekfinal = strtotime(date('Y-m-d', (time() + (7 - (date('w') == 0 ? 7 : date('w'))) * 24 * 3600+86400)));//本周末24:00时间戳
+    }
+
+
+
+    /**
+    *首页所需数据，封装私有函数
+    */
+    private static function buydata($movie){
+    	$weekfinal = strtotime(date('Y-m-d', (time() + (7 - (date('w') == 0 ? 7 : date('w'))) * 24 * 3600+86400)));//本周末24:00时间戳
 
 		$daystart = strtotime(date('Y-m-d',time()));//今天的0:00时间戳
 
@@ -51,18 +85,23 @@ class Index extends Common
 			}
 
 		}
+		return array($now,$week,$will);
+    }
 
-		//博客，这一块采用了redis存储，redis的好处请百度。会首先从redis中读取博客信息，若存在直接读取，若不存在则从数据库中读取，并写入redis。
+
+       /**
+    *首页所需数据，封装私有函数,博客排行数据
+    */
+    private static function Blogdata(){
+    	//博客，这一块采用了redis存储，redis的好处请百度。会首先从redis中读取博客信息，若存在直接读取，若不存在则从数据库中读取，并写入redis。
 		$redis = \redisObj\redisTool::getRedis();//创建一个redis的对象
-
 		if($redis->get('blogindex')){//redis中若存在blog的信息
-
 			$blog = json_decode($redis->get('blogindex'),true);
 		}else{
 			//redis中不存在，数据库读取5条
 			$blog = Db::query("select * from blog order by addtime desc limit 5");
 			//写入redis
-			$redis->setkey('blogindex',3600*24,json_encode($blog));
+			$redis->setkey('blogindex',3600,json_encode($blog));
 		}
 
 		//读取博客的点赞数据
@@ -71,32 +110,13 @@ class Index extends Common
 		for ($i=0; $i < count($blog); $i++) {
 			$countsql = "select count(*) as total from likes where blogid={$blog[$i]['id']}";
 			$blog[$i]['likecount'] = Db::query($countsql)[0]['total'];
-
-
 			//查询对于目前登录用户今天是否点赞
 			$existsql =    sprintf("select * from likes where userid=%d and blogid=%d and addtime between %d and %d" ,\think\Session::get('login_uid'),$blog[$i]['id'],$daystart,$dayover);
 			$existstatus=Db::query($existsql);
-
 			$blog[$i]['likestatus'] = \think\Session::get('login_uid') ? ($existstatus?1:0):0;
-
 		}
-
-		$this->assign('blog',$blog);
-
-		//在线视频,6条
-		$online = Db::query("select * from video where cate=2 order by id desc limit 6");
-		//传递数据
-		$this->assign(['now'=>$now,'week'=>$week,'will'=>$will,'day'=>$day,'online'=>$online]);
-		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
-		//top moview
-		$top_total = Db::query("select sum(view) as total from video where cate=1");
-		$top = Db::query("select id,title,view from video where cate=1 order by view desc limit 6");
-		$this->assign(['top'=>$top]);
-
-		//渲染视图
-		return $this->fetch('index');
+		return $blog;
     }
-
 
 
     //搜索,函数，前端的视频搜索会发起ajax请求到这个函数，很简单一个sql like模糊查询，将结果返回给前端，前端js将结果遍历展示即可
@@ -107,9 +127,6 @@ class Index extends Common
     		//%%在''中表示一个%
     		if(empty($data)) exit(json_encode(['code'=>-1]));
     		exit(json_encode(['code'=>1,'list'=>$data]));
-
-
-
     }
 
 
@@ -256,8 +273,6 @@ class Index extends Common
 	public function blog(){
 		//导航推荐,及在线影视推荐
     	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
-
-
 		$blog = Db::name('blog')->order('id desc')->paginate(6);
 		$page = $blog->render();
 		$hot = Db::query("select id,title from blog order by id asc limit 10");
@@ -275,14 +290,12 @@ class Index extends Common
 	public function readblog(){
 		//导航推荐,及在线影视推荐
     	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
-
 		$id = input('id');
 		$blog = Db::name('blog')->where(array('id'=>$id))->find();
 		$this->assign('blog',$blog);
 		$comment = Db::query("select a.content,a.addtime,b.nickname from blog_comment a left join user b ON a.uid=b.id where a.blogid='{$id}'");
 		$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
 		$this->assign('comments',$comment);
-
 		//最新博客
 		$latest = Db::query("select id,title from blog order by addtime desc limit 15");
 		$this->assign('latest',$latest);
@@ -346,7 +359,6 @@ class Index extends Common
     public function readnotice(){
     	//导航推荐,及在线影视推荐
     	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
-
     	$id = input('id');
     	$notice = Db::query("select * from notice where id=$id")[0];
     	$this->assign('notice',$notice);
@@ -363,7 +375,6 @@ class Index extends Common
     public function playonline(){
     	//导航推荐,及在线影视推荐
     	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
-
 		$id = input('id');
 		$video = Db::name('video')->where(['id'=>$id])->find();
 			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/"); $this->assign('video',$video);
@@ -442,6 +453,4 @@ class Index extends Common
 		exit(json_encode(array('code'=>1)));
 
 	}
-
-
 }
