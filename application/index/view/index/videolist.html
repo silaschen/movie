@@ -13,10 +13,10 @@
     
 			  <div class="col-sm-12 col-md-4" onclick="toUrl({$v['id']})">
 			    <div class="thumbnail overs" style="position: relative;">
-			    	<div style="position: absolute;top:0;background:#6f6262 ;opacity: 0.5;left: 0;right: 0;bottom: 90px;"><img style="margin-top: 70px;width: 80px;cursor: pointer;" class="center-block" src="{:$Think.Config.WEBSERVER}/public/static/play.png">
+			    	<div style="position: absolute;top:0;background:#6f6262 ;opacity: 0.5;left: 0;right: 0;bottom: 90px;"><img style="margin-top: 70px;width: 80px;cursor: pointer;" class="center-block" src="{$Think.Config.WEBSERVER}/public/static/play.png">
 			    	</div>
 
-			      <img src="{$v.cover}" alt="..." onmouseover="showplay()" style="cursor: pointer;">
+			      <img src="{$Think.Config.WEBSERVER}/{$v.cover}" alt="..." onmouseover="showplay()" style="cursor: pointer;">
 			      <div class="caption">
 			  
 			        <h4><a href="{:url('Index/Index/playonline',array('id'=>$v['id']))}" style="color: #282828;text-decoration: none;font-size: 16px;">{$v.title}</a></h4>
