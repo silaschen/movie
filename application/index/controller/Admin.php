@@ -474,6 +474,7 @@ function kill(){
 			->join("user u","fo.uid=u.id")
 			->field("fo.id,fo.orderid,fo.time,v.title,fo.money,c.name,fo.addtime,u.nickname,u.phone,fo.status")
 			->where($map)
+			->order('fo.id desc')
 			->paginate(10);
 			$page = $list->render();
 			$this->assign('page',$page);// 赋值分页输出

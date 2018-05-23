@@ -21,6 +21,7 @@ class Index extends Common
 		list($now,$week,$will) = self::buydata($movie);
 		//博客排行数据
 		$blog = self::Blogdata();
+
 		//传递数据
 		$this->assign(array(
 			'slides'=>$slides,
@@ -31,7 +32,8 @@ class Index extends Common
 			'week'=>$week,
 			'will'=>$will,
 			'online'=>$online,
-			'top'=>$top
+			'top'=>$top,
+			'webserver'=>\think\Config::get('WEBSERVER').'/',
 		));
 
 		//渲染视图
@@ -43,7 +45,7 @@ class Index extends Common
     *首页所需数据，封装私有函数
     */
     private static function FetchData(){
-    	$slides = Db::query('select * from slides order by id desc');//查询轮播图
+    	$slides = Db::query('select * from slides order by id desc limit 6');//查询轮播图
 
 		//首页公告
 		$notice = Db::query("select * from notice order by id desc limit 6");//选取最新6条公告信息
@@ -52,7 +54,9 @@ class Index extends Common
 		$movie = Db::query("select * from video where cate=1 order by id desc limit 8");//轮播购票，选取最新的8条电影票
 		//在线视频,6条
 		$online = Db::query("select * from video where cate=2 order by id desc limit 6");
+
 		$top = Db::query("select id,title,view from video where cate=1 order by view desc limit 6");
+
         return array($slides,$notice,$movie,$online,$top);
 
     }
@@ -62,7 +66,8 @@ class Index extends Common
     /**
     *首页所需数据，封装私有函数
     */
-    private static function buydata($movie){
+    private static function buydata(){
+    	$movie = Db::query("select * from video where cate=1");
     	$weekfinal = strtotime(date('Y-m-d', (time() + (7 - (date('w') == 0 ? 7 : date('w'))) * 24 * 3600+86400)));//本周末24:00时间戳
 
 		$daystart = strtotime(date('Y-m-d',time()));//今天的0:00时间戳
@@ -109,12 +114,14 @@ class Index extends Common
 		$dayover = $daystart+24*3600;
 		for ($i=0; $i < count($blog); $i++) {
 			$countsql = "select count(*) as total from likes where blogid={$blog[$i]['id']}";
+		
 			$blog[$i]['likecount'] = Db::query($countsql)[0]['total'];
 			//查询对于目前登录用户今天是否点赞
 			$existsql =    sprintf("select * from likes where userid=%d and blogid=%d and addtime between %d and %d" ,\think\Session::get('login_uid'),$blog[$i]['id'],$daystart,$dayover);
 			$existstatus=Db::query($existsql);
-			$blog[$i]['likestatus'] = \think\Session::get('login_uid') ? ($existstatus?1:0):0;
+			$blog[$i]['likestatus'] = \think\Session::get('login_uid') ? ($existstatus?1:0):false;
 		}
+
 		return $blog;
     }
 
@@ -124,9 +131,9 @@ class Index extends Common
 
     		$key=input('keytext');
     		$data = Db::query(sprintf("select * from video where title like '%%%s%%' and cate=2",$key));
-    		//%%在''中表示一个%
+    		//%%在''中表示
     		if(empty($data)) exit(json_encode(['code'=>-1]));
-    		exit(json_encode(['code'=>1,'list'=>$data]));
+    		exit(json_encode(array('code'=>1,'list'=>$data)));
     }
 
 
@@ -340,7 +347,6 @@ class Index extends Common
     public function videolist(){
     	//导航推荐,及在线影视推荐
     	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
-
     	$p = input('p') ? input('p'):1;
 	  	$map['cate'] = 2;
 		$model = Db::name('video');
@@ -390,6 +396,7 @@ class Index extends Common
 		*return $this->fetch('abput'),渲染about.html出来
 	*/
     public function about(){
+    	$this->navdata();
         return $this->fetch('about');
     }
 

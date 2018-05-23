@@ -514,7 +514,7 @@ function logout(){
                                     <a href="movies.html"><img src="{$Think.config.WEBSERVER}/`+obj.cover+`" alt="" /></a>
                                 </div>
                                     <div class="f-movie-name">
-                                        <a href="movies.html">{$ovo.title}</a>
+                                        <a href="movies.html">`+obj.title+`</a>
                                         <p>#在线播放#</p>
                                     </div>
                                 <div class="f-buy-tickets">
@@ -524,6 +524,9 @@ function logout(){
                         </li>`;
 
                             });
+
+
+
 
                             con+=  `</ul>`;
                             // console.log(con);

@@ -64,7 +64,7 @@
 
             {foreach name='slidetwo' item='slivo'}
 			<li>
-				<a href="movies.html"><img src="{$Think.config.WEBSERVER}/{$slivo.cover}" alt=""/></a>
+				<a href="{:url('index/Index/selectshow',array('id'=>$slivo['id']))}"><img src="{$Think.config.WEBSERVER}/{$slivo.cover}" alt=""/></a>
 				<div class="slide-title"><h4>{$slivo.title} </div>
 				<div class="date-city">
 					<h5>{$slivo.publishtime|date="M d",###}</h5>
@@ -317,7 +317,7 @@
 
 
       	function likeclick(blogid,obj){
-      		$.post("{$webserver}Index/index/like",{'blogid':blogid},function(huizhi){
+      		$.post("{$Think.Config.WEBSERVER}/Index/index/like",{'blogid':blogid},function(huizhi){
 
 
       				if(huizhi.code === 1){
