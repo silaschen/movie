@@ -7,15 +7,15 @@
     </div><!-- /.box-header -->
     <div class="box-body">
          <form method="POST" id='form'>
-         
+
             <div class='form-group'>
               <label>标题：</label>
               <input type='text' name='title' class='form-control'>
             </div>
-          
+
 
               <div class="form-group">
-                
+
                 <label>分类</label>
                 <select class="form-control" name="cate">
                   <option value="1">影院购票</option>
@@ -33,19 +33,19 @@
                     <div id="files" class="files">
                     </div>
                     <div class='showcover'>
-              
+
                     </div>
                 <input class='hide' name='cover' id='cover'>
             </div>
 
 
-            
+
             <div class="form-group">
               <label>导演</label>
               <input type="text" name="director" class="form-control">
             </div>
 
-            
+
 
             <div class='form-group'>
               <label>上映时间</label>
@@ -64,7 +64,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading"><button class="btn btn-success" type="button" onclick="AddOne()">添加影院</button></div>
                 <div class="panel-body" id="cinemabox">
-                    
+
 
 
 
@@ -77,7 +77,7 @@
     </div><!-- /.box-body -->
     <div class="box-footer clearfix">
       <button type="button" onclick="saveart();" class="btn btn-success pull-right saveart">确定</button>
-    </div>   
+    </div>
   </div>
 
 <div class="modal fade" tabindex="-1" id="ticket" role="dialog">
@@ -106,6 +106,12 @@
           <input type="date" class="form-control" aria-describedby="basic-addon1" id="publishend">
         </div>
 
+
+        <div class="input-group">
+            <span>tickets numbers for eachday each time</span>
+            <input type="text" name="stock" value="30" class="form-control">
+
+        </div>
 
         </div>
       </div>
@@ -142,7 +148,7 @@
 <script charset="utf-8" src="/public/com/kindeditor/kindeditor.js"></script>
 <script charset="utf-8" src="/public/com/kindeditor/lang/zh_CN.js"></script>
 <script type="text/javascript">
-// 
+//
 function saveart(){
 
   var cinemas = [];
@@ -156,11 +162,13 @@ function saveart(){
     });
     var btime = $(obj).attr('data-start');
     var etime = $(obj).attr('data-end');
+    var stock = $(obj).attr('data-stock');
     var item = {
         'cid':$(obj).attr('data-id'),
         'btime':btime,
           'etime':etime,
-        'time':times
+        'time':times,
+        'stock':stock
       };
 
     cinemas.push(item);
@@ -179,7 +187,7 @@ function saveart(){
   var cate = $("select[name='cate']").val();
   $.post("{:url('Admin/addvideo')}",{'title':title,'cover':cover,'publishtime':publishtime,'director':director,'price':price,'cinemas':cinemas,'cate':cate},function(data){
       alert(data.msg);
-   
+
   },'JSON');
 }
 
@@ -203,8 +211,9 @@ function pickCinema(){
   var cinemaname = $("#cinema option:selected").text();
   var start = $("#publishstart").val();
   var end = $("#publishend").val();
+  var stock = $("input[name='stock']").val();
 
-  var domcinema = `<div class="well ticked_cinema" data-id= `+cinemaid+` data-start=`+start+` data-end=`+end+` style='word-break:break-all'>
+  var domcinema = `<div class="well ticked_cinema" data-stock=`+stock+` data-id= `+cinemaid+` data-start=`+start+` data-end=`+end+` style='word-break:break-all'>
                         `+cinemaname+`<button type='button' class="btn btn-primary" onclick="AddOneTime(this)">+</button>
                       </div>`;
 

@@ -114,7 +114,7 @@ class Index extends Common
 		$dayover = $daystart+24*3600;
 		for ($i=0; $i < count($blog); $i++) {
 			$countsql = "select count(*) as total from likes where blogid={$blog[$i]['id']}";
-		
+
 			$blog[$i]['likecount'] = Db::query($countsql)[0]['total'];
 			//查询对于目前登录用户今天是否点赞
 			$existsql =    sprintf("select * from likes where userid=%d and blogid=%d and addtime between %d and %d" ,\think\Session::get('login_uid'),$blog[$i]['id'],$daystart,$dayover);
@@ -230,12 +230,16 @@ class Index extends Common
 			$vid = input('vid');
 			$cid = input('cid');
 			$tid = input('tid');
+      $time = input('time');
 			$ticket = Db::name('tickets')->where(['id'=>$tid])->find();
-			$time = input('time');
+      $buyed = Db::name('film_order')->where(['ticketid'=>$tid,'videoid'=>$vid,'time'=>$time])->sum('num');
 			$film = Db::name('video')->where(['id'=>$vid])->find();
 			$cinema = Db::name('cinemas')->where(['id'=>$cid])->find();
-			$this->assign(['cid'=>$cid,'film'=>$film,'time'=>$time,'cinema'=>$cinema,'ticket'=>$ticket]);
+			$this->assign(['cid'=>$cid,'film'=>$film,
+      'buyed'=>$buyed,'stock'=>$ticket['stock'],
+      'time'=>$time,'cinema'=>$cinema,'ticket'=>$ticket]);
 			$this->assign('webserver',\Think\Config::get('WEBSERVER')."/");
+      $this->assign('able',$buyed < $ticket['stock'] ? 1:2);
 			return $this->fetch('payment');
 		}
 
@@ -264,8 +268,9 @@ class Index extends Common
 		}
 		$data = $_POST;
 		$data['uid'] = \think\Session::get('login_uid');
-		$data['money'] = Db::query("select price from video where id='{$data['videoid']}'")[0]['price'];
+		$data['money'] = Db::query("select price from video where id='{$data['videoid']}'")[0]['price']*$data['num'];
 		$data['addtime'] = time();
+
 		$data['status'] = 2;//支付无法演示，直接默认已付款
 		$data['payinfo'] = json_encode(['banknum'=>$data['banknum'],'bankname'=>$data['bankname']]);
 		$data['orderid'] = md5($data['uid'].$data['money'].$data['videoid'].time());
@@ -327,7 +332,9 @@ class Index extends Common
 		//导航推荐,及在线影视推荐
     	$this->navdata();//每个函数都要用，所以封装一个新的函数，复用即可
 
-		$sql = sprintf("select o.id,o.orderid,o.addtime,o.status,v.title,c.name,o.time,o.money,t.btime,t.etime from film_order o join video v ON o.videoid=v.id join cinemas c ON o.cinemaid=c.id join tickets t ON o.ticketid=t.id where o.uid=%d",\think\Session::get('login_uid'));
+		$sql = sprintf("select o.id,o.orderid,o.addtime,o.status,o.num,v.title,c.name,o.time,o.money,
+    t.btime,t.etime from film_order o join video v ON o.videoid=v.id
+    join cinemas c ON o.cinemaid=c.id join tickets t ON o.ticketid=t.id where o.uid=%d order by o.addtime desc",\think\Session::get('login_uid'));
 		$ticket = Db::query($sql);
 		return $this->fetch('myticket',['ticket'=>$ticket]);
 	}
@@ -411,6 +418,22 @@ class Index extends Common
     	$this->assign('navbuy',$navbuy);
     	$navonline = Db::query("select * from video where cate=2 order by id desc limit 4");
     	$this->assign('navonline',$navonline);
+    }
+
+
+
+    //get getTotal
+    public function getTotal(){
+      $vid = input('vid');
+      $time = input('time');
+      $tid = input('tid');
+      $video = Db::name('video')->where(['id'=>input('vid')])->find();
+      $ticket = Db::name('tickets')->where(['id'=>$tid])->find();
+      $totalfee = $video['price']*input('num');
+      //ever buy today
+      $buyed = Db::name('film_order')->where(['videoid'=>$vid,'time'=>$time,'ticketid'=>$tid])->sum('num');
+      $able = $buyed+input('num') <= $ticket['stock'] ? true :false;
+      echo json_encode(['code'=>1,'fee'=>$totalfee,'buyed'=>$buyed,'able'=>$able]);
     }
 
 /*

@@ -120,7 +120,7 @@ function kill(){
 			Db::execute("delete from cinemas where id=$ID");
 			exit(json_encode(['code'=>1,'msg'=>'successfully']));
 		}
-			
+
 	}
 
 
@@ -278,7 +278,7 @@ function kill(){
 				$video = Db::query("select * from video where id=$id")[0];
 			$this->assign('video',$video);
 			}
-			
+
 			return $this->fetch('addonline',['title'=>'add video','eq'=>1]);
 		}else{
 			$data = \think\Request::instance()->post();
@@ -317,7 +317,8 @@ function kill(){
 					'videoid'=>$r,
 					'btime'=>strtotime($v['btime']),
 					'etime'=>strtotime($v['etime']),
-					'addtime'=>time()
+					'addtime'=>time(),
+					'stock'=>$v['stock']
 				);
 
 			Db::name('tickets')->insert($data);
@@ -517,7 +518,7 @@ function kill(){
 				Db::execute($sql);
 				exit(json_encode(['code'=>1,'msg'=>'delete the user successfully']));
 			}
-			
+
 	}
 
 
@@ -543,7 +544,7 @@ function kill(){
 			$this->assign('list',$list);
 			return $this->fetch('orderlist',['title'=>'order列表','eq'=>'订单管理']);
 		}else{
-			
+
 		}
 	}
 
