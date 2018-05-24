@@ -80,7 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																						
 						});
 				</script>
-
+<div id="user">
     {if condition="$Think.session.login_nick neq ''"}
 
             <button class="btn btn-primary"  data-toggle="modal">{$Think.session.login_nick}</button>
@@ -94,6 +94,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
     {/if}
+    </div>
 				<!-- Large modal -->
 
 
@@ -250,9 +251,16 @@ function login(){
 
 			if(data.code === 1){
 				$("#loginmodal").modal('hide');
-				$("#loginbtn").attr('data-target','');
-				$("#loginbtn").html(data.nickname);
-				alert('登陆成功');
+				// $("#loginbtn").attr('data-target','');
+				// $("#loginbtn").html(data.nickname);
+
+                var infouser = `<button class="btn btn-primary"  data-toggle="modal">`+data.nickname+`</button>
+             <button class="btn btn-primary" onclick="location.href='{:url('index/index/myticket')}'">我的购票</button>
+            <button class="btn btn-primary" onclick="logout()"  data-toggle="modal">登出</button>`;
+
+
+            $("#user").html(infouser);
+				// alert('登陆成功');
 			}else{
 				alert('邮箱或密码错误');
             }
@@ -264,7 +272,7 @@ function login(){
 
 function logout(){
 
-    $.post("{$webserver}Index/index/logout",function(ret){
+    $.post("{:url('index/index/logout')}",function(ret){
 
         if(ret.code===1){
             location.reload();
