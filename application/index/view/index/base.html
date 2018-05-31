@@ -247,7 +247,7 @@ function login(){
 		alert('请填写邮箱及密码');
 		return false;
 	}
-	$.post("{$webserver}Index/index/login",{'email':mail,'password':password},function(data){
+	$.post("{:url('index/index/login')}",{'email':mail,'password':password},function(data){
 
 			if(data.code === 1){
 				$("#loginmodal").modal('hide');
@@ -275,7 +275,7 @@ function logout(){
     $.post("{:url('index/index/logout')}",function(ret){
 
         if(ret.code===1){
-            location.reload();
+            location.href="{:url('index/index/index')}";
         }else{
             alert('未知的错误....');
         }

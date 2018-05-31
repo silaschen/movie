@@ -429,7 +429,8 @@ class Index extends Common
       $tid = input('tid');
       $video = Db::name('video')->where(['id'=>input('vid')])->find();
       $ticket = Db::name('tickets')->where(['id'=>$tid])->find();
-      $totalfee = $video['price']*input('num');
+      $totalfee = intval($video['price']*input('num'))+1;
+      $totalfee = sprintf("%.2f",$totalfee);
       //ever buy today
       $buyed = Db::name('film_order')->where(['videoid'=>$vid,'time'=>$time,'ticketid'=>$tid])->sum('num');
       $able = $buyed+input('num') <= $ticket['stock'] ? true :false;
