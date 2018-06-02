@@ -56,7 +56,7 @@
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="javascript:dealorder({$vo.id})">出票</a></li>
                   <li class="divider"></li>
-                  <li><a href="javascript:setstat({$vo.id},-1);">删除</a></li>
+                  <li><a href="javascript:del({$vo.id});">删除</a></li>
                 </ul>
               </div>
             </td>
@@ -80,6 +80,18 @@ function dealorder(id){
   },'JSON');
 
 
+
+}
+
+
+function del(id){
+  if(confirm('Are you sure to delete this item from the list?') == true){
+    $.post("{:url('index/admin/del')}",{'id':id},function(ret){
+      if(ret.code ==1){
+        location.reload();
+      }
+    },'JSON');
+  }
 
 }
 </script>

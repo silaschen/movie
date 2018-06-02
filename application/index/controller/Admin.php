@@ -481,7 +481,7 @@ function kill(){
 			$this->assign('page',$page);// 赋值分页输出
 			//分页跳转的时候保证查询条件
 			$this->assign('list',$list);
-			return $this->fetch('checklist',['title'=>'博客列表','eq'=>2]);
+			return $this->fetch('checklist',['title'=>'订单列表','eq'=>2]);
 		}else{
 			$id = input('id');
 			$order = Db::query("select * from film_order where id='{$id}' AND status=2")[0];
@@ -546,6 +546,14 @@ function kill(){
 		}else{
 
 		}
+	}
+
+
+	//del order from checklist
+	public function del(){
+		$id = input('id');
+		Db::execute(sprintf("delete from film_order where id=%d",$id));
+		exit(json_encode(['code'=>1]));
 	}
 
 
