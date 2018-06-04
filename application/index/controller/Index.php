@@ -34,6 +34,7 @@ class Index extends Common
 			'online'=>$online,
 			'top'=>$top,
 			'webserver'=>\think\Config::get('WEBSERVER').'/',
+			'eq'=>0
 		));
 
 		//渲染视图
@@ -289,6 +290,7 @@ class Index extends Common
 		$page = $blog->render();
 		$hot = Db::query("select id,title from blog order by id asc limit 10");
 		$this->assign('webserver',\think\Config::get('WEBSERVER')."/");
+		$this->assign('eq','博客');
 		return $this->fetch('blog',['blog'=>$blog,'page'=>$page,'hot'=>$hot]);
 	}
 
@@ -418,6 +420,8 @@ class Index extends Common
     	$this->assign('navbuy',$navbuy);
     	$navonline = Db::query("select * from video where cate=2 order by id desc limit 4");
     	$this->assign('navonline',$navonline);
+    	//菜单状态
+
     }
 
 

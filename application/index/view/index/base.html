@@ -313,8 +313,8 @@ function logout(){
 				</div><!-- end navbar-header -->
         
             <div id="defaultmenu" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="{:url('index/index/index')}">主页</a></li>	
+                <ul class="nav navbar-nav indexmenu">
+                    <li><a href="{:url('index/index/index')}">主页</a></li>	
                     <!-- Mega Menu -->
 			
 
@@ -352,7 +352,7 @@ function logout(){
 
 
 					<li class="dropdown w3_megamenu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">在线视频<b class="caret"></b></a>
-                        <ul class="dropdown-menu half3">
+                        <ul class="dropdown-menu half3 indexmenu">
                             <li class="w3_megamenu-content withoutdesc">
                                 <div class="row">
 								<h5 class="movies-page">想要浏览更多 - <a href="{:url('index/index/videolist')}">点击这里</a> </h5>
@@ -552,5 +552,19 @@ function logout(){
                 }
 
                 </script>
+
+                <script type="text/javascript">
+if(!isNaN('{$eq}')){
+  $(".indexmenu > li").eq({$eq}).addClass('active');
+}else{
+  $(".indexmenu > li").each(function(){
+    var txt = $.trim($(this).children('a').text());
+    if(txt == '{$eq}'){
+      $(this).addClass('active');
+      return;
+    }
+  });
+}
+</script>
 </body>
 </html>
